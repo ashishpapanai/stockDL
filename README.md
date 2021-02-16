@@ -1,4 +1,4 @@
-##** pyBhushan** [Draft]
+## ** pyBhushan** [Draft]
 **pyBhushan** is a begginer friendly shares yield predictor based on the trends of past 6 years. The model is an LSTM (Long Short Term Memory) based which is an improved version for a reccurent neural network. 
 
 **pyBhushan** leaves it to the user to understand the share price using two widely used stock trading stratergies and two Deep Learning stratergies:
