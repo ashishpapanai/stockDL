@@ -105,3 +105,47 @@ def monthly_df(df):
 
 df_monthly=monthly_df(df)
 print(df_monthly.head())
+
+# Tax Rates [India]
+capital_gains_tax=0.10
+broker_comission =0.003
+
+# Function to calculate Gross Yield in the shares
+
+def gross_yield(df,v):
+    prod=(v*df["quot"]+1-v).prod()
+    n_years=len(v)/12
+    return (prod-1)*100,((prod**(1/n_years))-1)*100
+
+# Function to convert a 1D vector of zeros and ones to a 2D vector of zeros and ones with the groups of ones seperated to different columns
+# E.g. [0,1,1,0,1,1,1,0,1]
+"""
+[[0, 1, 1, 0, 0, 0, 0, 0, 0],
+[0, 0, 0, 0, 1, 1, 1, 0, 0],
+[0, 0, 0, 0, 0, 0, 0, 0, 1]]),
+"""
+#this function will be used later [read documentation for details. ]
+def separate_ones(u):
+    
+    u_ = np.r_[0,u,0]
+    i = np.flatnonzero(u_[:-1] != u_[1:])
+    v,w = i[::2],i[1::2]
+    if len(v)==0:
+        return np.zeros(len(u)),0
+    
+    n,m = len(v),len(u) 
+    # n: tells the number of columns in the new array [number of group of 1s]
+    # m: tells the number of 1s in the array 
+    o = np.zeros(n*m,dtype=int)
+
+    r = np.arange(n)*m
+    o[v+r] = 1
+
+    if w[-1] == m:
+        o[w[:-1]+r[:-1]] = -1
+    else:
+        o[w+r] -= 1
+
+    #Store the cummulative sum of the elements 
+    out = o.cumsum().reshape(n,-1) 
+    return out, n, m

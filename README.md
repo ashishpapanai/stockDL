@@ -10,7 +10,7 @@ All stratergies are explained in the project documentation for the reference of 
 
 The readme will be updated as the project moves towards completion and any significant progress is made in the code. 
 
-***The Author/s of this project will not be responible for any loss in the financial market. Investments are subject to market risks please read all scheme related documents carefully. ***
+**The Author/s of this project will not be responible for any loss in the financial market. Investments are subject to market risks please read all scheme related documents carefully.**
 
 ### References and Citations
 1. [Deploy ML Model using Flask](https://www.youtube.com/watch?v=1Z7nt0Fyits&t=1361s)
