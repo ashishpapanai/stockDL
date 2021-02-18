@@ -206,4 +206,68 @@ X,y=Data_Preprocessing(df_monthly)
 print(X.shape,y.shape)
 
 # Splitting the data to training and testing data
+"""
+Based on the dimensions of the input and output matrices:
+Training data is split to the following dimensions: 
+X_train(72, 6, 8) y_train(72, )
+X_test(55, 6, 8) y_test(55, )
+"""
+
+split=72
+X_train=X[:-split-1,:,:]
+X_test=X[-split-1:,:,:]
+y_train=y[:-split-1]
+y_test=y[-split-1:]
+
+"""
+LSTM Model: 
+
+The first deep learning model comprises the following layers:
+1. LSTM layer with 300 nodes
+2. Dropout layer: which discards 50% nodes to reduce overfitting
+3. LSTM layer 2 with 200 nodes to improve model
+4. Dropout layer 2: which discards 50% nodes to reduce overfitting
+5. Dense layer with 100 nodes to reduce the number of nodes 
+6. Final Dense layer with 1 node [This layer is used as output layer] for regression. 
+"""
+
+def LSTM_Model(window,features):
+    
+    model=Sequential()
+    model.add(LSTM(300, input_shape = (window,features), return_sequences=True))
+    model.add(Dropout(0.5))
+    model.add(LSTM(200,  return_sequences=False)) # there is no need to specify input_shape here
+    model.add(Dropout(0.5))
+    model.add(Dense(100,kernel_initializer='uniform',activation='relu'))        
+    model.add(Dense(1,kernel_initializer='uniform',activation='relu'))
+    
+    model.compile(loss='mse',optimizer=Adam(lr=0.001))
+        
+    return model
+
+"""
+MIX LSTM MODEL:
+
+Same as the original LSTM model but with improved feature extraction in data by two 1D Convolution
+"""
+
+def Mix_LSTM_Model(window,features):
+    
+    model=Sequential()
+    model.add(Conv1D(input_shape=(window,features),filters=32,kernel_size=2,strides=1,activation='relu',padding='same'))
+    model.add(Conv1D(filters=64,kernel_size=2,strides=1,activation='relu',padding='same'))
+    model.add(LSTM(300, return_sequences=True))
+    model.add(Dropout(0.5))
+    model.add(LSTM(200,  return_sequences=False))
+    model.add(Dropout(0.5))
+    model.add(Dense(100,kernel_initializer='uniform',activation='relu'))        
+    model.add(Dense(1,kernel_initializer='uniform',activation='relu'))
+    
+    model.compile(loss='mse',optimizer=Adam(lr=0.001))
+
+    return model
+
+#the variable to store the model info
+lstm_model = LSTM_Model(window+1, 8)
+mix_lstm_model = Mix_LSTM_Model(window+1, 8)
 
