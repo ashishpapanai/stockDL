@@ -149,3 +149,61 @@ def separate_ones(u):
     #Store the cummulative sum of the elements 
     out = o.cumsum().reshape(n,-1) 
     return out, n, m
+
+
+# The following function will calculate the net yield in the share till the investment period. 
+def net_yield(df,v):
+
+    n_years=len(v)/12 
+    #v is the months for which we are trading in market, this variable converts months to years
+    w,n=separate_ones(v)
+    # w and n stores separate ones as explained in the separate_ones() function
+    A=(w*np.array(df["quot"])+(1-w)).prod(axis=1)  
+    # A is the product of each group of ones of 1 for df["quot"]
+    A1p=np.maximum(0,np.sign(A-1)) 
+    # vector of ones where the corresponding element if  A  is > 1, other are 0
+    Ap=A*A1p 
+    # vector of elements of A > 1, other are 0
+    Am=A-Ap 
+    # vector of elements of A <= 1, other are 0
+    An=Am+(Ap-A1p)*(1-capital_gains_tax)+A1p
+    prod=An.prod()*((1-broker_comission)**(2*n)) 
+    
+    return (prod-1)*100,((prod**(1/n_years))-1)*100
+
+
+
+# Creating a window of 6 months based on which the model will make predictions for the next month
+def create_window(data, window_size = 1):    
+    data_s = data.copy()
+    for i in range(window_size):
+        data = pd.concat([data, data_s.shift(-(i + 1))], axis = 1)
+       
+    data.dropna(axis=0, inplace=True)
+    return(data)
+
+# The data is preprocessed to be in between 0 and 1, this makes the data sutiable for Recurrent Neural Network
+
+def Data_Preprocessing(dfm):
+    #scales the values to number between 0 and 1 so that it can be RNN Ready
+    scaler=MinMaxScaler(feature_range=(0,1))
+    dg=pd.DataFrame(scaler.fit_transform(dfm[["High","Low","Open","Close","Volume","First Day Current Month Opening",\
+                                          "mv_avg_12","mv_avg_24","First Day Next Month Opening"]].values))
+    X=dg[[0,1,2,3,4,5,6,7]]
+    X=create_window(X,window)
+    X=np.reshape(X.values,(X.shape[0],window+1,8))
+    
+    y=np.array(dg[8][window:])
+    
+    return X,y
+
+# X: Input vector     y: Output vector
+# Dimensions of input data to the model (X): (Number of Months, Window + 1, number of columns/features)
+# Dimensions of output data from the model (y): (number of months)
+
+window=5
+X,y=Data_Preprocessing(df_monthly)
+print(X.shape,y.shape)
+
+# Splitting the data to training and testing data
+
