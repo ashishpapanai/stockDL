@@ -271,3 +271,151 @@ def Mix_LSTM_Model(window,features):
 lstm_model = LSTM_Model(window+1, 8)
 mix_lstm_model = Mix_LSTM_Model(window+1, 8)
 
+""" 
+Reducing learning rates when the learning curve reaches a plateau,
+ so that the gradient descent doesn't get struck in in an infinite maxima/minima. 
+"""
+learning_rate_reduction = ReduceLROnPlateau(monitor='val_loss', 
+                                            patience=25, 
+                                            verbose=1, 
+                                            factor=0.25, 
+                                            min_lr=0.00001)
+
+"""
+TensorBoard to monitor model performance
+
+To run tensorboard: tensorboard --logdir=TensorBoard_Logs
+"""
+tensorboard = keras.callbacks.TensorBoard(
+    log_dir='TensorBoard_Logs',
+    histogram_freq=1,
+    embeddings_freq=1
+)
+
+"""
+The following variable trains the model and save the training history in it. 
+"""
+lstm_history = lstm_model.fit(X_train,y_train,epochs=400, batch_size=24, validation_data=(X_test, y_test), \
+                  verbose=1, callbacks=[learning_rate_reduction, tensorboard],shuffle=False)
+
+mix_history = mix_lstm_model.fit(X_train,y_train,epochs=400, batch_size=24, validation_data=(X_test, y_test), \
+                  verbose=1, callbacks=[learning_rate_reduction, tensorboard],shuffle=False)
+
+"""
+Save the model weights after training
+"""
+lstm_model.save_weights("lstm_weights.h5")
+mix_lstm_model.save_weights("mix_lstm_weights.h5")
+
+"""
+Function to plot the model training and test data which would be available in TensorBoard as well. 
+"""
+
+def plot_training_data(model_selected):
+    plt.plot(model_selected.history['loss'])
+    plt.plot(model_selected.history['val_loss'])
+    plt.title('model loss')
+    plt.ylabel('loss')
+    plt.xlabel('epoch')
+    plt.legend(['train', 'test'], loc='upper right')
+    plt.show()
+
+#Predict the values of the training data for comparisons
+
+y_pred_train_lstm = lstm_model.predict(X_train)
+y_pred_train_mix = mix_lstm_model.predict(X_train)
+
+"""
+The following lines help in plotting the prediction of LSTM and Mix LSTM model
+"""
+
+plt.figure(figsize=(30,10))
+plt.plot(y_train, label="Actual")
+plt.plot(y_pred_train_lstm, label="Prediction by LSTM Model")
+plt.plot(y_pred_train_mix, label="Prediction by Mix-LSTM Model")
+plt.legend(fontsize=20)
+plt.grid(axis="both")
+plt.title("Actual Open Price and Pedicted Ones on train set",fontsize=25)
+plt.show()
+
+"""
+Testing the stratergy on the testing data
+"""
+y_pred_lstm = lstm_model.predict(X_test)
+y_pred_mix = mix_lstm_model.predict(X_test)
+
+"""
+The following variables store when we stay in market and when we move out from the market. 
+"""
+w_lstm=np.diff(y_pred_lstm.reshape(y_pred_lstm.shape[0]),1)
+v_lstm=np.maximum(np.sign(w_lstm),0)
+
+w_mix=np.diff(y_pred_mix.reshape(y_pred_mix.shape[0]),1)
+v_mix=np.maximum(np.sign(w_mix),0)
+
+"""
+Plotting the In-Out Months: 
+In: 1 we stay in market as the price is greater than the actual price of the stock. 
+Out: 0 we stay out of the market as the price of stock is less than the actual price of the stock. 
+"""
+plt.figure(figsize=(30,10))
+plt.plot(y_test, label="Actual")
+plt.plot(y_pred_lstm, label="LSTM Predictions")
+plt.plot(v_lstm,label="In and out LSTM")
+plt.plot(y_pred_mix, label="Mix LSTM Predictions")
+plt.plot(v_mix,label="In and out Mix LSTM")
+plt.legend(fontsize=20)
+plt.grid(axis="both")
+plt.title("Actual Open Price, Predicted Ones and Vectors on In and Out Moments",fontsize=25)
+plt.show()
+
+"""
+The variable vb and vh stores the months for which we will trade in the market. 
+"""
+test = df_monthly.iloc[-split:,:] 
+v_bh = np.ones(test.shape[0])
+v_ma = test["fd_cm_open"]>test["mv_avg_12"]
+
+"""
+The following function helps in calculating the Gross Yield:
+The gross yield of an investment is its profit before taxes and expenses are deducted. 
+Gross yield is expressed in percentage terms. 
+"""
+
+def gross_portfolio(df,w):
+    portfolio=[ (w*df["quot"]+(1-w))[:i].prod() for i in range(len(w))]
+    return portfolio
+
+
+"""
+The following lines helps to plot the comparison graph of the portfolio of the 3 trading stratergies used in the project. 
+"""
+plt.figure(figsize=(30,10))
+plt.plot(gross_portfolio(test,v_bh),label="Portfolio Buy and Hold Strategy")
+plt.plot(gross_portfolio(test,v_ma),label="Portfolio Moving Average Strategy")
+plt.plot(gross_portfolio(test,v_lstm),label="Portfolio LSTM Model")
+plt.plot(gross_portfolio(test,v_mix),label="Portfolio Mix LSTM Model")
+plt.legend(fontsize=20)
+plt.grid(axis="both")
+plt.title("Gross Portfolios of three methods", fontsize=25)
+plt.show()
+
+
+"""
+This fincal function stores all 
+"""
+def result_calculations():
+    print("Test period of {:.2f} years, from {} to {} \n".format(len(v_bh)/12,str(test.loc[test.index[0],"fd_cm"])[:10], str(test.loc[test.index[-1],"fd_nm"])[:10]))
+    
+    results=pd.DataFrame({})
+    results["Method"]=["Buy and hold","Moving average","LSTM","Mix"]
+    vs=[v_bh,v_ma,v_lstm,v_mix]
+    results["Total ross yield"]=[str(round(gross_yield(test,vi)[0],2))+" %" for vi in vs]
+    results["Annual gross yield"]=[str(round(gross_yield(test,vi)[1],2))+" %" for vi in vs]
+    results["Total net yield"]=[str(round(net_yield(test,vi)[0],2))+" %" for vi in vs]
+    results["Annual net yield"]=[str(round(net_yield(test,vi)[1],2))+" %" for vi in vs]
+    print(results)
+
+    return results
+
+result_calculations()
