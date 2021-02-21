@@ -15,16 +15,13 @@ yfinance - to get the financial data from Yahoo Finance
 import pandas as pd
 import numpy as np
 import datetime
-import time
 import matplotlib.pyplot as plt
 from pandas_datareader import data as pdr
 import keras
 from keras.models import Sequential
 from keras.optimizers import RMSprop, Adam
-from keras.layers import Dense, Dropout, BatchNormalization, Conv1D, Flatten, MaxPooling1D, LSTM
-from keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard, ReduceLROnPlateau
-from keras.wrappers.scikit_learn import KerasRegressor
-from keras.models import load_model
+from keras.layers import Dense, Dropout, Conv1D, LSTM
+from keras.callbacks import TensorBoard, ReduceLROnPlateau
 from sklearn.preprocessing import MinMaxScaler
 import yfinance as yf
 
@@ -34,7 +31,7 @@ import tensorflow as tf
 gpus = tf.config.experimental.list_physical_devices('GPU')
 tf.config.experimental.set_memory_growth(gpus[0], True)
 
-# This variable stores the stock symbol to retrive data from Yahoo Finance
+# This variable stores the stockyf symbol to retrive data from Yahoo Finance
 ticker = input("Please enter the stock symbol: ")
 # this pandas dataframe will store the historical market data for the stock symbol
 
@@ -442,10 +439,10 @@ v_bh)/12, str(test.loc[test.index[0], "First Day Current Month"])[:10], str(test
     results = pd.DataFrame({})
     results["Method"] = ["Buy and hold", "Moving average", "LSTM", "Mix"]
     vs = [v_bh, v_ma, v_lstm, v_mix]
-    results["Total ross yield"] = [str(round(gross_yield(test, vi)[0], 2))+" %" for vi in vs]
-    results["Annual gross yield"] = [str(round(gross_yield(test, vi)[1], 2))+" %" for vi in vs]
-    results["Total net yield"] = [str(round(net_yield(test, vi)[0], 2))+" %" for vi in vs]
-    results["Annual net yield"] = [str(round(net_yield(test, vi)[1], 2))+" %" for vi in vs]
+    results["Total Gross Yield"] = [str(round(gross_yield(test, vi)[0], 2))+" %" for vi in vs]
+    results["Annual Gross Yield"] = [str(round(gross_yield(test, vi)[1], 2))+" %" for vi in vs]
+    results["Total Net Yield"] = [str(round(net_yield(test, vi)[0], 2))+" %" for vi in vs]
+    results["Annual Net Yield"] = [str(round(net_yield(test, vi)[1], 2))+" %" for vi in vs]
     #print(results)
     return results
 
