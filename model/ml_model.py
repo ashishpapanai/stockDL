@@ -125,7 +125,7 @@ broker_comission = 0.003
 
 
 def gross_yield(df, v):
-    prod = (v*df["quot"]+1-v).prod()
+    prod = (v*df["Quotient"]+1-v).prod()
     n_years = len(v)/12
     return (prod-1)*100, ((prod**(1/n_years))-1)*100
 
@@ -163,7 +163,7 @@ def separate_ones(u):
 
     # Store the cummulative sum of the elements
     out = o.cumsum().reshape(n, -1)
-    return out, n, m
+    return out, n
 
 
 # The following function will calculate the net yield in the share till the investment period.
@@ -173,8 +173,8 @@ def net_yield(df, v):
     # v is the months for which we are trading in market, this variable converts months to years
     w, n = separate_ones(v)
     # w and n stores separate ones as explained in the separate_ones() function
-    A = (w*np.array(df["quot"])+(1-w)).prod(axis=1)
-    # A is the product of each group of ones of 1 for df["quot"]
+    A = (w*np.array(df["Quotient"])+(1-w)).prod(axis=1)
+    # A is the product of each group of ones of 1 for df["Quotient"]
     A1p = np.maximum(0, np.sign(A-1))
     # vector of ones where the corresponding element if  A  is > 1, other are 0
     Ap = A*A1p
@@ -335,7 +335,7 @@ Function to plot the model training and test data which would be available in Te
 """
 
 
-def plot_training_data(model_selected):
+def plot_training_data(model_selected, metric):
     plt.plot(model_selected.history['loss'])
     plt.plot(model_selected.history['val_loss'])
     plt.title('model loss')
@@ -344,6 +344,7 @@ def plot_training_data(model_selected):
     plt.legend(['train', 'test'], loc='upper right')
     plt.show()
 
+#plot_training_data(lstm_model, 'accuracy')
 # Predict the values of the training data for comparisons
 
 
@@ -360,7 +361,7 @@ plt.plot(y_pred_train_lstm, label="Prediction by LSTM Model")
 plt.plot(y_pred_train_mix, label="Prediction by Mix-LSTM Model")
 plt.legend(fontsize=20)
 plt.grid(axis="both")
-plt.title("Actual Open Price and Pedicted Ones on train set", fontsize=25)
+plt.title("Actual Open Price and Pedicted Ones on train set", fontsize=20)
 plt.show()
 
 """
@@ -392,7 +393,7 @@ plt.plot(v_mix, label="In and out Mix LSTM")
 plt.legend(fontsize=20)
 plt.grid(axis="both")
 plt.title(
-    "Actual Open Price, Predicted Ones and Vectors on In and Out Moments", fontsize=25)
+    "Actual Open Price, Predicted Ones and Vectors on In and Out Moments", fontsize=20)
 plt.show()
 
 """
@@ -400,7 +401,7 @@ The variable vb and vh stores the months for which we will trade in the market.
 """
 test = df_monthly.iloc[-split:, :]
 v_bh = np.ones(test.shape[0])
-v_ma = test["fd_cm_open"] > test["mv_avg_12"]
+v_ma = test["First Day Current Month Opening"] > test["mv_avg_12"]
 
 """
 The following function helps in calculating the Gross Yield:
@@ -410,7 +411,7 @@ Gross yield is expressed in percentage terms.
 
 
 def gross_portfolio(df, w):
-    portfolio = [(w*df["quot"]+(1-w))[:i].prod() for i in range(len(w))]
+    portfolio = [(w*df["Quotient"]+(1-w))[:i].prod() for i in range(len(w))]
     return portfolio
 
 
@@ -425,7 +426,7 @@ plt.plot(gross_portfolio(test, v_lstm), label="Portfolio LSTM Model")
 plt.plot(gross_portfolio(test, v_mix), label="Portfolio Mix LSTM Model")
 plt.legend(fontsize=20)
 plt.grid(axis="both")
-plt.title("Gross Portfolios of three methods", fontsize=25)
+plt.title("Gross Portfolios of three methods", fontsize=20)
 plt.show()
 
 
@@ -436,22 +437,17 @@ This fincal function stores all
 
 def result_calculations():
     print("Test period of {:.2f} years, from {} to {} \n".format(len(
-        v_bh)/12, str(test.loc[test.index[0], "fd_cm"])[:10], str(test.loc[test.index[-1], "fd_nm"])[:10]))
+v_bh)/12, str(test.loc[test.index[0], "First Day Current Month"])[:10], str(test.loc[test.index[-1], "First Day Next Month"])[:10]))
 
     results = pd.DataFrame({})
     results["Method"] = ["Buy and hold", "Moving average", "LSTM", "Mix"]
     vs = [v_bh, v_ma, v_lstm, v_mix]
-    results["Total ross yield"] = [
-        str(round(gross_yield(test, vi)[0], 2))+" %" for vi in vs]
-    results["Annual gross yield"] = [
-        str(round(gross_yield(test, vi)[1], 2))+" %" for vi in vs]
-    results["Total net yield"] = [
-        str(round(net_yield(test, vi)[0], 2))+" %" for vi in vs]
-    results["Annual net yield"] = [
-        str(round(net_yield(test, vi)[1], 2))+" %" for vi in vs]
-    print(results)
-
+    results["Total ross yield"] = [str(round(gross_yield(test, vi)[0], 2))+" %" for vi in vs]
+    results["Annual gross yield"] = [str(round(gross_yield(test, vi)[1], 2))+" %" for vi in vs]
+    results["Total net yield"] = [str(round(net_yield(test, vi)[0], 2))+" %" for vi in vs]
+    results["Annual net yield"] = [str(round(net_yield(test, vi)[1], 2))+" %" for vi in vs]
+    #print(results)
     return results
 
+print(result_calculations())
 
-result_calculations()
