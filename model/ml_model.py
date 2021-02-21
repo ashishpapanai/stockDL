@@ -324,8 +324,8 @@ mix_history = mix_lstm_model.fit(X_train, y_train, epochs=400, batch_size=24, va
 """
 Save the model weights after training
 """
-lstm_model.save_weights("lstm_weights.h5")
-mix_lstm_model.save_weights("mix_lstm_weights.h5")
+lstm_model.save_weights("model/lstm_weights.h5")
+mix_lstm_model.save_weights("model/mix_lstm_weights.h5")
 
 """
 Function to plot the model training and test data which would be available in TensorBoard as well. 
