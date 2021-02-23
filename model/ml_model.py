@@ -195,7 +195,7 @@ def create_window(data, window_size=1):
 # The data is preprocessed to be in between 0 and 1, this makes the data sutiable for Recurrent Neural Network
 
 
-def Data_Preprocessing(dfm):
+def data_scaling(dfm):
     # scales the values to number between 0 and 1 so that it can be RNN Ready
     scaler = MinMaxScaler(feature_range=(0, 1))
     dg = pd.DataFrame(scaler.fit_transform(dfm[["High", "Low", "Open", "Close", "Volume", "First Day Current Month Opening",
@@ -214,7 +214,7 @@ def Data_Preprocessing(dfm):
 
 
 window = 5
-X, y = Data_Preprocessing(df_monthly)
+X, y = data_scaling(df_monthly)
 print(X.shape, y.shape)
 
 # Splitting the data to training and testing data

@@ -1,10 +1,21 @@
 import numpy as np
 import data
+from sklearn.preprocessing import MinMaxScaler
+import pandas as pd
+import calculations
 
 class data_preprocessing():
     def __init__(self):
         self.df_monthly = self.monthly_df(data.df)
-    
+        self.df_monthly = self.monthly_df(data.df)
+        self.window = 5
+        self.X, self.y = self.data_scaling(self.df_monthly)
+        self.split = 72
+        self.X_train = self.X[:-self.split-1, :, :]
+        self.X_test = self.X[-self.split-1:, :, :]
+        self.y_train = self.y[:-self.split-1]
+        self.y_test = self.y[-self.split-1:]
+
     def monthly_df(df):
 
         dfm = df.resample("M").mean()
@@ -17,10 +28,22 @@ class data_preprocessing():
         dfm["First Day Next Month Opening"] = np.array(
             df.loc[data.first_days[1:], "Open"])
         dfm["Quotient"] = dfm["First Day Next Month Opening"].divide(
-        dfm["First Day Current Month Opening"])
+            dfm["First Day Current Month Opening"])
 
         dfm["mv_avg_12"] = dfm["Open"].rolling(window=12).mean().shift(1)
         dfm["mv_avg_24"] = dfm["Open"].rolling(window=24).mean().shift(1)
 
         dfm = dfm.iloc[24:, :]
         return dfm
+
+    def data_scaling(self, dfm):
+        scaler = MinMaxScaler(feature_range=(0, 1))
+        dg = pd.DataFrame(scaler.fit_transform(dfm[["High", "Low", "Open", "Close", "Volume", "First Day Current Month Opening",
+                                                    "mv_avg_12", "mv_avg_24", "First Day Next Month Opening"]].values))
+        X = dg[[0, 1, 2, 3, 4, 5, 6, 7]]
+        X = calculations.Calculations.create_window(X, self.window)
+        X = np.reshape(X.values, (X.shape[0], self.window+1, 8))
+
+        y = np.array(dg[8][self.window:])
+
+        return X, y
