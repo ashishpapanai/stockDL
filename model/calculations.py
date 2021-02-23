@@ -42,11 +42,3 @@ class Calculations():
         An = Am+(Ap-A1p)*(1-self.capital_gains_tax)+A1p
         prod = An.prod()*((1-self.broker_comission)**(2*n))
         return (prod-1)*100, ((prod**(1/n_years))-1)*100
-
-    def create_window(self, data, window_size=1):
-        data_s = data.copy()
-        for i in range(window_size):
-            data = pd.concat([data, data_s.shift(-(i + 1))], axis=1)
-
-        data.dropna(axis=0, inplace=True)
-        return(data)

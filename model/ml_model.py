@@ -24,9 +24,9 @@ from keras.optimizers import RMSprop, Adam
 from keras.layers import Dense, Dropout, Conv1D, LSTM
 from keras.callbacks import TensorBoard, ReduceLROnPlateau
 from sklearn.preprocessing import MinMaxScaler
+import tensorflow as tf
 
 # Restricting the GPU from consuming all memory
-import tensorflow as tf
 gpus = tf.config.experimental.list_physical_devices('GPU')
 tf.config.experimental.set_memory_growth(gpus[0], True)
 
