@@ -17,14 +17,13 @@ import numpy as np
 import datetime
 import matplotlib.pyplot as plt
 from pandas_datareader import data as pdr
+import yfinance as yf
 import keras
 from keras.models import Sequential
 from keras.optimizers import RMSprop, Adam
 from keras.layers import Dense, Dropout, Conv1D, LSTM
 from keras.callbacks import TensorBoard, ReduceLROnPlateau
 from sklearn.preprocessing import MinMaxScaler
-import yfinance as yf
-
 
 # Restricting the GPU from consuming all memory
 import tensorflow as tf
@@ -37,7 +36,7 @@ ticker = input("Please enter the stock symbol: ")
 
 
 def load_data(ticker):
-    stock = yf.Ticker("RPOWER.BO")
+    stock = yf.Ticker(ticker)
     stock.info
     # get historical market data
     df = stock.history(period="max")
