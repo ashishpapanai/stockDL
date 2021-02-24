@@ -7,7 +7,9 @@ import tensorflow as tf
 import preprocessing
 import models
 class Training():
-    def __init__(self):
+    def __init__(self, ticker):
+        self.preprocessing = preprocessing.data_preprocessing(ticker)
+        self.models = models.Models(ticker)
         self.learning_rate_reduction = ReduceLROnPlateau(monitor='val_loss',
                                             patience=25,
                                             verbose=1,
@@ -19,14 +21,15 @@ class Training():
                                                         embeddings_freq=1
                                                     )       
         self.lstm_history, self.mix_history = self.train_model()
-        models.Models.lstm_model.save_weights("model/lstm_weights.h5")
-        models.Models.mix_lstm_model.save_weights("model/mix_lstm_weights.h5")
+        self.models.lstm_model.save_weights("model/lstm_weights.h5")
+        self.models.mix_lstm_model.save_weights("model/mix_lstm_weights.h5")
+        print("Trained !!!")
 
     def train_model(self):
-        lstm_history = self.lstm_model.fit(preprocessing.X_train, preprocessing.y_train, epochs=400, batch_size=24, validation_data=(preprocessing.X_test, preprocessing.y_test),
+        lstm_history = self.models.lstm_model.fit(self.preprocessing.X_train, self.preprocessing.y_train, epochs=400, batch_size=24, validation_data=(self.preprocessing.X_test, self.preprocessing.y_test),
                               verbose=1, callbacks=[self.learning_rate_reduction, self.tensorboard], shuffle=False)
 
-        mix_history = self.mix_lstm_model.fit(preprocessing.X_train, preprocessing.y_train, epochs=400, batch_size=24, validation_data=(preprocessing.X_test, preprocessing.y_test),
+        mix_history = self.models.mix_lstm_model.fit(self.preprocessing.X_train, self.preprocessing.y_train, epochs=400, batch_size=24, validation_data=(self.preprocessing.X_test, self.preprocessing.y_test),
                                  verbose=1, callbacks=[self.learning_rate_reduction, self.tensorboard], shuffle=False)
  
         return lstm_history, mix_history

@@ -13,9 +13,10 @@ import tensorflow as tf
 import preprocessing
 
 class Models():
-    def __init__(self):
-        self.lstm_model = self.LSTM_Model(preprocessing.window+1, 8)
-        self.mix_lstm_model = self.Mix_LSTM_Model(preprocessing.window+1, 8)
+    def __init__(self, ticker):
+        self.preprocessing = preprocessing.data_preprocessing(ticker)
+        self.lstm_model = self.LSTM_Model(self.preprocessing.window+1, 8)
+        self.mix_lstm_model = self.Mix_LSTM_Model(self.preprocessing.window+1, 8)
 
     def LSTM_Model(self, window, features):
         model = Sequential()
