@@ -1,8 +1,4 @@
-import pandas as pd
-import numpy as np
 import datetime
-import matplotlib.pyplot as plt
-from pandas_datareader import data as pdr
 import yfinance as yf
 import tensorflow as tf
 # Restricting the GPU from consuming all memory

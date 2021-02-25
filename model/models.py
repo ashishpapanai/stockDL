@@ -1,14 +1,6 @@
-import pandas as pd
-import numpy as np
-from pandas_datareader import data as pdr
-import yfinance as yf
-import keras
 from keras.models import Sequential
-from keras.optimizers import RMSprop, Adam
+from keras.optimizers import Adam
 from keras.layers import Dense, Dropout, Conv1D, LSTM
-from keras.callbacks import TensorBoard, ReduceLROnPlateau
-from sklearn.preprocessing import MinMaxScaler
-import tensorflow as tf
 
 import preprocessing
 

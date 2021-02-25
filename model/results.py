@@ -1,0 +1,28 @@
+import pandas as pd
+from pandas_datareader import data as pdr
+import calculations
+import train, preprocessing, market
+
+class Results():
+    def __init__(self, ticker):
+        self.preprocessing = preprocessing.data_preprocessing(ticker)
+        self.train = train.Training(ticker) 
+        self.market = market.Market()
+        self.calculations = calculations.Calculations()
+
+    def result_calculations(self):
+        print("Test period of {:.2f} years, from {} to {} \n".format(len(self.preprocessing.v_bh)/12, 
+                str(self.preprocessing.test.loc[self.preprocessing.test.index[0], "First Day Current Month"])[:10]
+                , str(self.preprocessing.test.loc[self.preprocessing.test.index[-1], "First Day Next Month"])[:10]))
+
+        results = pd.DataFrame({})
+        results["Method"] = ["Buy and hold", "Moving average", "LSTM", "Mix"]
+        vs = [self.preprocessing.v_bh, self.preprocessing.v_ma, self.market.v_lstm, self.market.v_mix]
+        results["Total Gross Yield"] = [str(round(self.calculations.gross_yield(self.preprocessing.test, vi)[0], 2))+" %" for vi in vs]
+        results["Annual Gross Yield"] = [str(round(self.calculations.gross_yield(self.preprocessing.test, vi)[1], 2))+" %" for vi in vs]
+        results["Total Net Yield"] = [str(round(self.net_yield(self.preprocessing.test, vi)[0], 2))+" %" for vi in vs]
+        results["Annual Net Yield"] = [str(round(self.calculations.net_yield(self.preprocessing.test, vi)[1], 2))+" %" for vi in vs]
+        
+        return results
+
+

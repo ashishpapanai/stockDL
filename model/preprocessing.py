@@ -2,7 +2,6 @@ import numpy as np
 import data
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
-import calculations
 
 class data_preprocessing():
     def __init__(self, ticker):
@@ -15,6 +14,9 @@ class data_preprocessing():
         self.X_test = self.X[-self.split-1:, :, :]
         self.y_train = self.y[:-self.split-1]
         self.y_test = self.y[-self.split-1:]
+        self.test = self.df_monthly.iloc[-self.split:, :]
+        self.v_bh = np.ones(self.test.shape[0])
+        self.v_ma = self.test["First Day Current Month Opening"] > self.test["mv_avg_12"]
 
     def monthly_df(self, df):
 

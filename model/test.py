@@ -1,4 +1,5 @@
-import data, preprocessing,calculations, models, train
+from matplotlib.pyplot import plot
+import data, preprocessing,calculations, models, train, plots, results, market
 
 
 ticker = 'MSFT'
@@ -12,4 +13,10 @@ print(df_monthly.head())
 X, y = data_preprocessor.data_scaling(df_monthly)
 print(X.shape, y.shape)
 
-training = train.Training(ticker)
+#training = train.Training(ticker)
+
+plots = plots.Plots(ticker)
+plots.plot_predictions()
+
+results = results.Results(ticker)
+print(results.result_calculations())

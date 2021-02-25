@@ -42,3 +42,7 @@ class Calculations():
         An = Am+(Ap-A1p)*(1-self.capital_gains_tax)+A1p
         prod = An.prod()*((1-self.broker_comission)**(2*n))
         return (prod-1)*100, ((prod**(1/n_years))-1)*100
+
+    def gross_portfolio(self, df, w):
+        portfolio = [(w*df["Quotient"]+(1-w))[:i].prod() for i in range(len(w))]
+        return portfolio
