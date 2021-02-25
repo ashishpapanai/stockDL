@@ -35,7 +35,7 @@ class Calculations():
     def net_yield(self, df, v):
         n_years = len(v)/12
         w, n = self.separate_ones(v)
-        print((w*np.array(df["Quotient"])+(1-w)).shape)
+        #print((w*np.array(df["Quotient"])+(1-w)).shape)
         A = (w*np.array(df["Quotient"])+(1-w)).prod(axis=1)
         A1p = np.maximum(0, np.sign(A-1))
         Ap = A*A1p

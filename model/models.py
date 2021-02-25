@@ -2,11 +2,11 @@ from keras.models import Sequential
 from keras.optimizers import Adam
 from keras.layers import Dense, Dropout, Conv1D, LSTM
 
-import preprocessing
+import model.preprocessing
 
 class Models():
     def __init__(self, ticker):
-        self.preprocessing = preprocessing.data_preprocessing(ticker)
+        self.preprocessing = model.preprocessing.data_preprocessing(ticker)
         self.lstm_model = self.LSTM_Model(self.preprocessing.window+1, 8)
         self.mix_lstm_model = self.Mix_LSTM_Model(self.preprocessing.window+1, 8)
 

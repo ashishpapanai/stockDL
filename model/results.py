@@ -1,12 +1,13 @@
 import pandas as pd
 from pandas_datareader import data as pdr
-import calculations, preprocessing, market
+import model.calculations, model.preprocessing, model.market
 
 class Results():
     def __init__(self, ticker):
-        self.preprocessing = preprocessing.data_preprocessing(ticker)
-        self.market = market.Market(ticker)
-        self.calculations = calculations.Calculations()
+        self.preprocessing = model.preprocessing.data_preprocessing(ticker)
+        self.market = model.market.Market(ticker)
+        self.calculations = model.calculations.Calculations()
+        self.result = self.result_calculations()
 
     def result_calculations(self):
         print("Test period of {:.2f} years, from {} to {} \n".format(len(self.preprocessing.v_bh)/12, 

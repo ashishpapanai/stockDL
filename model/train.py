@@ -1,13 +1,13 @@
 import keras
 from keras.callbacks import TensorBoard, ReduceLROnPlateau
 from numpy.core.numeric import False_
-import preprocessing
-import models, checkTraining
+import model.preprocessing
+import model.models, model.checkTraining
 
 class Training():
     def __init__(self, ticker):
-        self.preprocessing = preprocessing.data_preprocessing(ticker)
-        self.models = models.Models(ticker)
+        self.preprocessing = model.preprocessing.data_preprocessing(ticker)
+        self.models = model.models.Models(ticker)
         self.learning_rate_reduction = ReduceLROnPlateau(monitor='val_loss',
                                             patience=25,
                                             verbose=1,

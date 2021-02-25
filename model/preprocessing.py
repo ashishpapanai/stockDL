@@ -1,11 +1,11 @@
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
-import data
+import model.data
 
 class data_preprocessing():
     def __init__(self, ticker):
-        self.data_reader = data.Data_Loader(ticker)
+        self.data_reader = model.data.Data_Loader(ticker)
         self.df_monthly = self.monthly_df(self.data_reader.df)
         self.window = 5
         self.X, self.y = self.data_scaling(self.df_monthly)

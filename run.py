@@ -1,4 +1,4 @@
-from model import main
+import model.main
 
 ticker = input('Enter the ticker: ')
-main = main.finDL(ticker)
+main = model.main.finDL(ticker)
