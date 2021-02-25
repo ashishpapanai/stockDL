@@ -11,7 +11,7 @@ from keras.layers import Dense, Dropout, Conv1D, LSTM
 from keras.callbacks import TensorBoard, ReduceLROnPlateau
 from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
-import train, preprocessing, models
+import train, preprocessing, models, training_variables
 
 class Market():
     def __init__(self, ticker):

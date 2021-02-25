@@ -1,13 +1,12 @@
 import pandas as pd
 from pandas_datareader import data as pdr
 import calculations
-import train, preprocessing, market
+import preprocessing, market
 
 class Results():
     def __init__(self, ticker):
         self.preprocessing = preprocessing.data_preprocessing(ticker)
-        self.train = train.Training(ticker) 
-        self.market = market.Market()
+        self.market = market.Market(ticker)
         self.calculations = calculations.Calculations()
 
     def result_calculations(self):
@@ -20,7 +19,7 @@ class Results():
         vs = [self.preprocessing.v_bh, self.preprocessing.v_ma, self.market.v_lstm, self.market.v_mix]
         results["Total Gross Yield"] = [str(round(self.calculations.gross_yield(self.preprocessing.test, vi)[0], 2))+" %" for vi in vs]
         results["Annual Gross Yield"] = [str(round(self.calculations.gross_yield(self.preprocessing.test, vi)[1], 2))+" %" for vi in vs]
-        results["Total Net Yield"] = [str(round(self.net_yield(self.preprocessing.test, vi)[0], 2))+" %" for vi in vs]
+        #results["Total Net Yield"] = [str(round(self.calculations.net_yield(self.preprocessing.test, vi)[0], 2))+" %" for vi in vs]
         results["Annual Net Yield"] = [str(round(self.calculations.net_yield(self.preprocessing.test, vi)[1], 2))+" %" for vi in vs]
         
         return results

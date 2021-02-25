@@ -1,11 +1,12 @@
 import matplotlib.pyplot as plt
 from calculations import Calculations
-import train, preprocessing, market
+import train, preprocessing, market, training_variables
 
 class Plots():
     def __init__(self, ticker):
         self.preprocessing = preprocessing.data_preprocessing(ticker)
-        self.train = train.Training(ticker) 
+        self.train = train.Training(ticker)
+        #self.training_variables = training_variables.Training_Variables(ticker)
         self.market = market.Market(ticker)
         self.calculations = Calculations()
 
@@ -31,9 +32,9 @@ class Plots():
     def in_out(self):
         plt.figure(figsize=(30, 10))
         plt.plot(self.preprocessing.y_test, label="Actual")
-        plt.plot(self.preprocessing.y_pred_lstm, label="LSTM Predictions")
+        plt.plot(self.train.y_pred_lstm, label="LSTM Predictions")
         plt.plot(self.market.v_lstm, label="In and out LSTM")
-        plt.plot(self.train.y_pred_mix, label="Mix LSTM Predictions")
+        plt.plot(self.training_vatiables.y_pred_mix, label="Mix LSTM Predictions")
         plt.plot(self.market.v_mix, label="In and out Mix LSTM")
         plt.legend(fontsize=20)
         plt.grid(axis="both")
@@ -43,8 +44,8 @@ class Plots():
 
     def comparison_plots(self):
         plt.figure(figsize=(30, 10))
-        plt.plot(self.calculations.gross_portfolio(self.preprocessing.test, self.portfolio.v_bh), label="Portfolio Buy and Hold Strategy")
-        plt.plot(self.calculations.gross_portfolio(self.preprocessing.test, self.portfolio.v_ma),
+        plt.plot(self.calculations.gross_portfolio(self.preprocessing.test, self.preprocessing.v_bh), label="Portfolio Buy and Hold Strategy")
+        plt.plot(self.calculations.gross_portfolio(self.preprocessing.test, self.preprocessing.v_ma),
                 label="Portfolio Moving Average Strategy")
         plt.plot(self.calculations.gross_portfolio(self.preprocessing.test, self.market.v_lstm), label="Portfolio LSTM Model")
         plt.plot(self.calculations.gross_portfolio(self.preprocessing.test, self.market.v_mix), label="Portfolio Mix LSTM Model")
