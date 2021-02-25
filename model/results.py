@@ -1,7 +1,6 @@
 import pandas as pd
 from pandas_datareader import data as pdr
-import calculations
-import preprocessing, market
+import calculations, preprocessing, market
 
 class Results():
     def __init__(self, ticker):

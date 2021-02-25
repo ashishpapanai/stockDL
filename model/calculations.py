@@ -1,4 +1,3 @@
-from numpy.core.fromnumeric import shape
 import pandas as pd
 import numpy as np
 
