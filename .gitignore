@@ -5,3 +5,6 @@ lstm_weights.h5
 mix_lstm_weights.h5
 model/__pycache__
 __pycache__
+dist
+build
+stockDL.egg-info

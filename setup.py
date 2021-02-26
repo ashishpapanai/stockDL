@@ -1,0 +1,35 @@
+import pathlib
+from setuptools import setup
+
+# The directory containing this file
+HERE = pathlib.Path(__file__).parent
+
+# The text of the README file
+README = (HERE / "README.md").read_text()
+
+# This call to setup() does all the work
+setup(
+    name="stockDL",
+    version="0.0.1",
+    description="Predicts the Gross Yield, Annual Yield and Net Yield of a user given stock ticker.",
+    long_description=README,
+    long_description_content_type="text/markdown",
+    url="https://github.com/ashishpapanai/stockDL",
+    author="Ashish Papanai",
+    author_email="ashishpapanai00@gmail.com",
+    license="GNU General Public License v3 (GPLv3)",
+    classifiers=[
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+    ],
+    packages=["stockDL"],
+    include_package_data=True,
+    install_requires=["pandas", "numpy", "matplotlib", "keras", "tensorflow", "yahoo-finance", "yfinance", "fix-yahoo-finance"],
+    entry_points={
+        "console_scripts": [
+            "stocksDL=stocksDL.__main__:main",
+        ]
+    },
+)
