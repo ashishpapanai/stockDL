@@ -3,7 +3,9 @@ import yfinance as yf
 import tensorflow as tf
 # Restricting the GPU from consuming all memory
 gpus = tf.config.experimental.list_physical_devices('GPU')
-tf.config.experimental.set_memory_growth(gpus[0], True)
+if len(gpus) > 0:
+    tf.config.experimental.set_memory_growth(gpus[0], True)
+    print("Using GPU")
 
 class Data_Loader():
     def __init__(self, ticker):

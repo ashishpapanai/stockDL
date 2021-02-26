@@ -1,13 +1,13 @@
 import matplotlib.pyplot as plt
-import train, preprocessing, market, training_variables, calculations
+import stockDL.train, stockDL.preprocessing, stockDL.market, stockDL.training_variables, stockDL.calculations
 
 class Plots():
     def __init__(self, ticker):
-        self.preprocessing = preprocessing.data_preprocessing(ticker)
-        self.train = train.Training(ticker)
+        self.preprocessing = stockDL.preprocessing.data_preprocessing(ticker)
+        self.train = stockDL.train.Training(ticker)
         #self.training_variables = training_variables.Training_Variables(ticker)
-        self.market = market.Market(ticker)
-        self.calculations = calculations.Calculations()
+        self.market = stockDL.market.Market(ticker)
+        self.calculations = stockDL.calculations.Calculations()
 
     def plot_training_data(self, model_selected, metric='loss', val_metric='val_loss'):
         plt.plot(model_selected.history[metric])

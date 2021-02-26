@@ -2,7 +2,7 @@ import keras
 from keras.callbacks import TensorBoard, ReduceLROnPlateau
 from numpy.core.numeric import False_
 import preprocessing
-import models, checkTraining
+import stockDL.models, stockDL.checkTraining
 
 class Training():
     def __init__(self, ticker):

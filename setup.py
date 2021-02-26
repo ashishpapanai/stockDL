@@ -29,7 +29,7 @@ setup(
     install_requires=["pandas", "numpy", "matplotlib", "keras", "tensorflow", "yahoo-finance", "yfinance", "fix-yahoo-finance"],
     entry_points={
         "console_scripts": [
-            "stocksDL=stocksDL.__main__:main",
+            "stocksDL=stocksDL.__main__",
         ]
     },
 )
