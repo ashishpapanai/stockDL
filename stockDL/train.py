@@ -19,8 +19,8 @@ class Training():
                                                         embeddings_freq=1
                                                     )  
         #self.lstm_history, self.mix_history = self.train_model()
-        self.models.lstm_model.save_weights("model/lstm_weights.h5")
-        self.models.mix_lstm_model.save_weights("model/mix_lstm_weights.h5")
+        self.models.lstm_model.save_weights("stockDL/lstm_weights.h5")
+        self.models.mix_lstm_model.save_weights("stockDL/mix_lstm_weights.h5")
         self.y_pred_train_lstm = self.models.lstm_model.predict(self.preprocessing.X_train)
         self.y_pred_train_mix = self.models.mix_lstm_model.predict(self.preprocessing.X_train)
         self.y_pred_lstm = self.models.lstm_model.predict(self.preprocessing.X_test)
