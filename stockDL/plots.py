@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from . import train, preprocessing, market, calculations
+import train, preprocessing, market, calculations
 
 class Plots():
     def __init__(self, ticker):

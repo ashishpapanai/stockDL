@@ -1,4 +1,4 @@
-from . import preprocessing, train, plots, results
+import preprocessing, train, plots, results
 class Main():
     def __init__(self, ticker):
         self.ticker = ticker

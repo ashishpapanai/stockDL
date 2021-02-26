@@ -1,4 +1,4 @@
-from .main import Main
+from main import Main
 
 def main():
     ticker = input('Enter the ticker: ')

@@ -2,7 +2,7 @@ from keras.models import Sequential
 from keras.optimizers import Adam
 from keras.layers import Dense, Dropout, Conv1D, LSTM
 
-from . import preprocessing
+import preprocessing
 
 class Models():
     def __init__(self, ticker):

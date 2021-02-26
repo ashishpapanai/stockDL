@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
-from . import data
+import data
 
 class data_preprocessing():
     def __init__(self, ticker):

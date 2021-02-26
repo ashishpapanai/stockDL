@@ -18,9 +18,9 @@ setup(
     author="Ashish Papanai",
     author_email="ashishpapanai00@gmail.com",
     py_modules=["calculations", "data", "main", "market", "models", "plots", "preprocessing", "results", "train"],
-    license="GNU General Public License v3 (GPLv3)",
+    license="MIT",
     classifiers=[
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "License :: OSI Approved :: MIT",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
@@ -30,7 +30,7 @@ setup(
     install_requires=["pandas", "numpy", "matplotlib", "keras", "tensorflow", "yahoo-finance", "yfinance", "fix-yahoo-finance"],
     entry_points={
         "console_scripts": [
-            "stocksDL=stocksDL.__main__:main()",
+            "stocksDL=stocksDL.__main__:main",
         ]
     },
 )
