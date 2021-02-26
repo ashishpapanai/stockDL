@@ -1,8 +1,8 @@
 import keras
 from keras.callbacks import TensorBoard, ReduceLROnPlateau
 from numpy.core.numeric import False_
-import preprocessing
-import stockDL.models, stockDL.checkTraining
+from . import preprocessing
+from . import models
 
 class Training():
     def __init__(self, ticker):

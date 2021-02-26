@@ -1,12 +1,12 @@
 import pandas as pd
 from pandas_datareader import data as pdr
-import stockDL.calculations, stockDL.preprocessing, stockDL.market
+from . import calculations, preprocessing, market
 
 class Results():
     def __init__(self, ticker):
-        self.preprocessing = stockDL.preprocessing.data_preprocessing(ticker)
-        self.market = stockDL.market.Market(ticker)
-        self.calculations = stockDL.calculations.Calculations()
+        self.preprocessing = preprocessing.data_preprocessing(ticker)
+        self.market = market.Market(ticker)
+        self.calculations = calculations.Calculations()
         self.result = self.result_calculations()
 
     def result_calculations(self):

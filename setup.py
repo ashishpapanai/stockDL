@@ -17,6 +17,7 @@ setup(
     url="https://github.com/ashishpapanai/stockDL",
     author="Ashish Papanai",
     author_email="ashishpapanai00@gmail.com",
+    py_modules=["calculations", "data", "main", "market", "models", "plots", "preprocessing", "results", "train"],
     license="GNU General Public License v3 (GPLv3)",
     classifiers=[
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
@@ -29,7 +30,7 @@ setup(
     install_requires=["pandas", "numpy", "matplotlib", "keras", "tensorflow", "yahoo-finance", "yfinance", "fix-yahoo-finance"],
     entry_points={
         "console_scripts": [
-            "stocksDL=stocksDL.__main__",
+            "stocksDL=stocksDL.__main__:main()",
         ]
     },
 )
