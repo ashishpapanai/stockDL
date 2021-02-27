@@ -1,11 +1,11 @@
-import keras
 from keras.callbacks import TensorBoard, ReduceLROnPlateau
-from numpy.core.numeric import False_
-import preprocessing
-import models
+from . import preprocessing
+from . import models
 
-class Training():
+
+class Training:
     def __init__(self, ticker):
+
         self.preprocessing = preprocessing.data_preprocessing(ticker)
         self.models = models.Models(ticker)
         self.learning_rate_reduction = ReduceLROnPlateau(monitor='val_loss',
@@ -19,9 +19,9 @@ class Training():
                                                         embeddings_freq=1
                                                     )  
         """
-        #self.lstm_history, self.mix_history = self.train_model()
-        #self.models.lstm_model.save_weights(lstm_weights.h5")
-        #self.models.mix_lstm_model.save_weights("mix_lstm_weights.h5")
+        # self.lstm_history, self.mix_history = self.train_model()
+        # self.models.lstm_model.save_weights(lstm_weights.h5")
+        # self.models.mix_lstm_model.save_weights("mix_lstm_weights.h5")
         self.y_pred_train_lstm = self.models.lstm_model.predict(self.preprocessing.X_train)
         self.y_pred_train_mix = self.models.mix_lstm_model.predict(self.preprocessing.X_train)
         self.y_pred_lstm = self.models.lstm_model.predict(self.preprocessing.X_test)

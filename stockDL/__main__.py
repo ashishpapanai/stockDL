@@ -1,8 +1,9 @@
-from main import Main
+from .main import Main
+
 
 def main():
     ticker = input('Enter the ticker: ')
-    mainObj = Main(ticker)
+    main_obj = Main(ticker)
 
 
 if __name__ == '__main__':

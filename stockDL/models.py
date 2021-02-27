@@ -2,7 +2,8 @@ from keras.models import Sequential
 from keras.optimizers import Adam
 from keras.layers import Dense, Dropout, Conv1D, LSTM
 
-import preprocessing
+from . import preprocessing
+
 
 class Models():
     def __init__(self, ticker):
@@ -39,6 +40,3 @@ class Models():
         model.compile(loss='mse', optimizer=Adam(lr=0.001))
 
         return model
-
-
-    

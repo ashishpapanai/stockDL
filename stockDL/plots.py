@@ -1,11 +1,12 @@
 import matplotlib.pyplot as plt
-import train, preprocessing, market, calculations
+from . import train, preprocessing, market, calculations
 
-class Plots():
+
+class Plots:
     def __init__(self, ticker):
         self.preprocessing = preprocessing.data_preprocessing(ticker)
         self.train = train.Training(ticker)
-        #self.training_variables = training_variables.Training_Variables(ticker)
+        # self.training_variables = training_variables.Training_Variables(ticker)
         self.market = market.Market(ticker)
         self.calculations = calculations.Calculations()
 
@@ -33,7 +34,7 @@ class Plots():
         plt.plot(self.preprocessing.y_test, label="Actual")
         plt.plot(self.train.y_pred_lstm, label="LSTM Predictions")
         plt.plot(self.market.v_lstm, label="In and out LSTM")
-        plt.plot(self.training_vatiables.y_pred_mix, label="Mix LSTM Predictions")
+        plt.plot(self.train.y_pred_mix, label="Mix LSTM Predictions")
         plt.plot(self.market.v_mix, label="In and out Mix LSTM")
         plt.legend(fontsize=20)
         plt.grid(axis="both")

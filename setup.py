@@ -20,7 +20,7 @@ setup(
     py_modules=["calculations", "data", "main", "market", "models", "plots", "preprocessing", "results", "train"],
     license="MIT",
     classifiers=[
-        "License :: OSI Approved :: MIT",
+        "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
