@@ -1,6 +1,9 @@
 ![Stock (1)](https://user-images.githubusercontent.com/52123364/109387767-49942e00-7929-11eb-92d6-970f5bc81107.png)
 # stockDL: A Deep Learning library for stocks price predictions and calculations
 [![PyPI version](https://badge.fury.io/py/stockDL.svg)](https://pypi.org/project/stockDL/)    [![Documentation Status](https://readthedocs.org/projects/stockdl/badge/?version=latest)](https://stockdl.readthedocs.io/en/latest/?badge=latest) ![](https://img.shields.io/github/stars/ashishpapanai/stockDL.svg) ![](https://img.shields.io/github/forks/ashishpapanai/stockDL.svg) ![](https://img.shields.io/github/tag/ashishpapanai/stockDL.svg) ![](https://img.shields.io/github/release/ashishpapanai/stockDL.svg) ![](https://img.shields.io/github/issues/ashishpapanai/stockDL.svg) 
+
+> Copy paste is not the way you should share code.
+
 ### Features
 
 - **Single stock trading and price comparisons** based on 2 traditional stock market algorithms [Buy and Hold & Moving Average], and 2 deep learning algorithms [LSTM Network and Conv1D + LSTM Network]
