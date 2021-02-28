@@ -12,3 +12,4 @@ tensorboard==2.4.1
 tensorflow==2.4.1
 tensorflow-gpu==2.4.1
 yahoo-finance==1.4.0
+yfinance
