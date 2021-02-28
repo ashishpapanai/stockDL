@@ -2,6 +2,7 @@
 This module handles the training of the two-deep learning strategies used in this library.
 It requires preprocessing and models modules and their dependencies. 
 '''
+
 from keras.callbacks import ReduceLROnPlateau
 from . import models
 from . import preprocessing
@@ -11,19 +12,21 @@ class Training:
     def __init__(self, ticker):
         self.preprocessing = preprocessing.data_preprocessing(ticker)
         self.models = models.Models(ticker)
+        
         '''Prevents false minima by reducing the learning rates on plateaus. '''
+
         self.learning_rate_reduction = ReduceLROnPlateau(monitor='val_loss',
                                                          patience=25,
                                                          verbose=1,
                                                          factor=0.25,
                                                          min_lr=0.00001)
-        """Uncomment and add tensorboard to callbacks to run TensorBoard for visualisation
+        '''Uncomment and add tensorboard to callbacks to run TensorBoard for visualisation
         self.tensorboard = keras.callbacks.TensorBoard(
                                                         log_dir='TensorBoard_Logs',
                                                         histogram_freq=1,
                                                         embeddings_freq=1
                                                     )  
-        """
+        '''
         # self.lstm_history, self.mix_history = self.train_model()
         # self.models.lstm_model.save_weights(lstm_weights.h5")
         # self.models.mix_lstm_model.save_weights("mix_lstm_weights.h5")

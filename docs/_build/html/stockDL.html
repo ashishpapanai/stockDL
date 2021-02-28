@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>stockDL package &#8212; stockDL v0.0.3 documentation</title>
+    <link rel="stylesheet" href="_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/insipid.css" type="text/css" />
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script defer src="_static/insipid.js"></script>
+    <script defer src="_static/insipid-sidebar.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="stockDL" href="modules.html" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+  </head>
+  <body class="sidebar-visible">
+    <script type="text/javascript">
+        (function() {
+            var $body = $(document.body);
+            $body.addClass('js');
+            $body.addClass('sidebar-resizing');  // avoid transitions on load
+            $body.removeClass('sidebar-visible');
+            try {
+                var sidebar = localStorage.getItem('sphinx-sidebar');
+                if (sidebar === 'visible') {
+                    $body.addClass('sidebar-visible');
+                }
+                var sidebar_width = localStorage.getItem('sphinx-sidebar-width');
+                if (sidebar_width) {
+                    $(':root').css('--sidebar-width', sidebar_width);
+                }
+            } catch(e) {
+            }
+        })();
+    </script>
+    <header id="topbar-placeholder">
+      <div id="topbar">
+        <div id="titlebar">
+          <div class="buttons">
+            <button id="sidebar-button" type="button" aria-controls="sphinxsidebar" accesskey="M">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"/></svg>
+            </button>
+          </div>
+          <div class="title">
+            <a class="parent" href="modules.html" accesskey="U">stockDL</a>
+            <a class="top" href="#">stockDL package</a>
+          </div>
+          <div class="buttons">
+            <button id="fullscreen-button" type="button" aria-hidden="true">
+              <span class="enable">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M212.686 315.314L120 408l32.922 31.029c15.12 15.12 4.412 40.971-16.97 40.971h-112C10.697 480 0 469.255 0 456V344c0-21.382 25.803-32.09 40.922-16.971L72 360l92.686-92.686c6.248-6.248 16.379-6.248 22.627 0l25.373 25.373c6.249 6.248 6.249 16.378 0 22.627zm22.628-118.628L328 104l-32.922-31.029C279.958 57.851 290.666 32 312.048 32h112C437.303 32 448 42.745 448 56v112c0 21.382-25.803 32.09-40.922 16.971L376 152l-92.686 92.686c-6.248 6.248-16.379 6.248-22.627 0l-25.373-25.373c-6.249-6.248-6.249-16.378 0-22.627z"/></svg>
+              </span>
+              <span class="disable">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M4.686 427.314L104 328l-32.922-31.029C55.958 281.851 66.666 256 88.048 256h112C213.303 256 224 266.745 224 280v112c0 21.382-25.803 32.09-40.922 16.971L152 376l-99.314 99.314c-6.248 6.248-16.379 6.248-22.627 0L4.686 449.941c-6.248-6.248-6.248-16.379 0-22.627zM443.314 84.686L344 184l32.922 31.029c15.12 15.12 4.412 40.971-16.97 40.971h-112C234.697 256 224 245.255 224 232V120c0-21.382 25.803-32.09 40.922-16.971L296 136l99.314-99.314c6.248-6.248 16.379-6.248 22.627 0l25.373 25.373c6.248 6.248 6.248 16.379 0 22.627z"/></svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <nav>
+      <a href="modules.html" class="nav-icon previous" title="previous:&#13;stockDL" aria-label="Previous topic" accesskey="P" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>
+      </a>
+    </nav>
+
+    <nav class="relbar">
+      <a class="previous" href="modules.html" aria-label="Previous topic" >
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
+        </div>
+        <div class="title">
+          <span class="text">
+            <span class="direction">previous</span>
+            stockDL
+          </span>
+        </div>
+      </a>
+    </nav>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+<div class="section" id="stockdl-package">
+<h1>stockDL package<a class="headerlink" href="#stockdl-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-stockDL.calculations">
+<span id="stockdl-calculations-module"></span><h2>stockDL.calculations module<a class="headerlink" href="#module-stockDL.calculations" title="Permalink to this headline">¶</a></h2>
+<p>This module comprises all functions to calculate the net yield and gross yield.</p>
+<dl class="py class">
+<dt id="stockDL.calculations.Calculations">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">stockDL.calculations.</span></code><code class="sig-name descname"><span class="pre">Calculations</span></code><a class="headerlink" href="#stockDL.calculations.Calculations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="stockDL.calculations.Calculations.gross_portfolio">
+<code class="sig-name descname"><span class="pre">gross_portfolio</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.calculations.Calculations.gross_portfolio" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="stockDL.calculations.Calculations.gross_yield">
+<code class="sig-name descname"><span class="pre">gross_yield</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.calculations.Calculations.gross_yield" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="stockDL.calculations.Calculations.net_yield">
+<code class="sig-name descname"><span class="pre">net_yield</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.calculations.Calculations.net_yield" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="stockDL.calculations.Calculations.separate_ones">
+<code class="sig-name descname"><span class="pre">separate_ones</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.calculations.Calculations.separate_ones" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-stockDL.data">
+<span id="stockdl-data-module"></span><h2>stockDL.data module<a class="headerlink" href="#module-stockDL.data" title="Permalink to this headline">¶</a></h2>
+<p>This module helps in data collection from Yahoo Finance API with the help of yfinace library. 
+The stock data is loaded from its unique stock symbol, also called ticker. 
+After the data is loaded, we drop the axis which isn’t being used by us in the library.
+After dropping the unnecessary axis we calculate and store the first days of each trading month in a list.</p>
+<dl class="py class">
+<dt id="stockDL.data.Data_Loader">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">stockDL.data.</span></code><code class="sig-name descname"><span class="pre">Data_Loader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ticker</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.data.Data_Loader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="stockDL.data.Data_Loader.date_calculations">
+<code class="sig-name descname"><span class="pre">date_calculations</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.data.Data_Loader.date_calculations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="stockDL.data.Data_Loader.end_date">
+<code class="sig-name descname"><span class="pre">end_date</span></code><a class="headerlink" href="#stockDL.data.Data_Loader.end_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the first day of each month from the starting date of stock to the day of executing the library</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stockDL.data.Data_Loader.load_data">
+<code class="sig-name descname"><span class="pre">load_data</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.data.Data_Loader.load_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-stockDL.main">
+<span id="stockdl-main-module"></span><h2>stockDL.main module<a class="headerlink" href="#module-stockDL.main" title="Permalink to this headline">¶</a></h2>
+<p>This Module handles the generation of results in the CLI, based on the ticker passed as the argument to the object of the Main class. 
+The execution begins by retrieving the financial data from yfinace library which is handled in the data module of stockDL.
+After the data is collected the first trading day of each month is stored in a list by the date_calculation() function in the data module.
+The data is then preprocessed by the preprocessor module which creates a window to run the predictions on.
+It also comprises min-max scaling which reduces sudden highs and lows in the data which would have resulted in anomalies. 
+The training module trains the model created in the model module on the data retrieved by the preprocessing module. 
+The plots module helps in plotting the necessary graphs for better visualisation for EDA.
+The result module uses the calculation and market modules to run the necessary calculations on the predictions,
+and generate net and the gross yield on the predictions obtained.</p>
+<dl class="py class">
+<dt id="stockDL.main.Main">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">stockDL.main.</span></code><code class="sig-name descname"><span class="pre">Main</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ticker</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.main.Main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="stockDL.main.Main.data_preprocessor">
+<code class="sig-name descname"><span class="pre">data_preprocessor</span></code><a class="headerlink" href="#stockDL.main.Main.data_preprocessor" title="Permalink to this definition">¶</a></dt>
+<dd><p>This variable stores the monthly data for analysis by the model</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stockDL.main.Main.df_monthly">
+<code class="sig-name descname"><span class="pre">df_monthly</span></code><a class="headerlink" href="#stockDL.main.Main.df_monthly" title="Permalink to this definition">¶</a></dt>
+<dd><p>This instance of train module will help in preventing the training to occur more than once thus reducing the probability of overfitting.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stockDL.main.Main.plots">
+<code class="sig-name descname"><span class="pre">plots</span></code><a class="headerlink" href="#stockDL.main.Main.plots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a comparison plot of the 4 methos used</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stockDL.main.Main.result">
+<code class="sig-name descname"><span class="pre">result</span></code><a class="headerlink" href="#stockDL.main.Main.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the pandas dataframe to JSON for better utilisation by web developers</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stockDL.main.Main.results">
+<code class="sig-name descname"><span class="pre">results</span></code><a class="headerlink" href="#stockDL.main.Main.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the final result in a pandas dataframe</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stockDL.main.Main.ticker">
+<code class="sig-name descname"><span class="pre">ticker</span></code><a class="headerlink" href="#stockDL.main.Main.ticker" title="Permalink to this definition">¶</a></dt>
+<dd><p>this module helps in loading the data by calling an instance of data.py module and also helps in data preprocessing.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stockDL.main.Main.train">
+<code class="sig-name descname"><span class="pre">train</span></code><a class="headerlink" href="#stockDL.main.Main.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains the data on the defined models</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-stockDL.market">
+<span id="stockdl-market-module"></span><h2>stockDL.market module<a class="headerlink" href="#module-stockDL.market" title="Permalink to this headline">¶</a></h2>
+<p>This module stores the stock market variables related to the stock ticker, 
+This module must be run after training the model by calling the train_model() function in the train module.</p>
+<dl class="py class">
+<dt id="stockDL.market.Market">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">stockDL.market.</span></code><code class="sig-name descname"><span class="pre">Market</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ticker</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.market.Market" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="stockDL.market.Market.v_lstm">
+<code class="sig-name descname"><span class="pre">v_lstm</span></code><a class="headerlink" href="#stockDL.market.Market.v_lstm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the sign of the lstm predictions as +ve, -ve or zero which implies profit, loss and no profit no loss in the trade.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stockDL.market.Market.v_mix">
+<code class="sig-name descname"><span class="pre">v_mix</span></code><a class="headerlink" href="#stockDL.market.Market.v_mix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the sign of the mix model predictions as +ve, -ve or zero which implies profit, loss and no profit no loss in the trade.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stockDL.market.Market.w_lstm">
+<code class="sig-name descname"><span class="pre">w_lstm</span></code><a class="headerlink" href="#stockDL.market.Market.w_lstm" title="Permalink to this definition">¶</a></dt>
+<dd><p>This stores the predictions of the lstm model and reshapes it.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stockDL.market.Market.w_mix">
+<code class="sig-name descname"><span class="pre">w_mix</span></code><a class="headerlink" href="#stockDL.market.Market.w_mix" title="Permalink to this definition">¶</a></dt>
+<dd><p>This stores the predictions of the mix model (conv1D + LSTM) and reshapes it.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-stockDL.models">
+<span id="stockdl-models-module"></span><h2>stockDL.models module<a class="headerlink" href="#module-stockDL.models" title="Permalink to this headline">¶</a></h2>
+<p>This module stores the brain of the library which is the Deep Learning model.
+The two Deep Learning strategies are defined in their respective methods. 
+This module requires to run the preprocessing module so that the model gets the data to work on.</p>
+<dl class="py class">
+<dt id="stockDL.models.Models">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">stockDL.models.</span></code><code class="sig-name descname"><span class="pre">Models</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ticker</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.models.Models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="stockDL.models.Models.LSTM_Model">
+<code class="sig-name descname"><span class="pre">LSTM_Model</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.models.Models.LSTM_Model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="stockDL.models.Models.Mix_LSTM_Model">
+<code class="sig-name descname"><span class="pre">Mix_LSTM_Model</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.models.Models.Mix_LSTM_Model" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-stockDL.plots">
+<span id="stockdl-plots-module"></span><h2>stockDL.plots module<a class="headerlink" href="#module-stockDL.plots" title="Permalink to this headline">¶</a></h2>
+<p>This module helps in plotting the various details related to the model and the predictions, 
+This module requires the processed data from the pre-processing module, training data from the train module,
+Market information from the market module, and the calculations from the calculations module.</p>
+<dl class="py class">
+<dt id="stockDL.plots.Plots">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">stockDL.plots.</span></code><code class="sig-name descname"><span class="pre">Plots</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ticker</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.plots.Plots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="stockDL.plots.Plots.comparison_plots">
+<code class="sig-name descname"><span class="pre">comparison_plots</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.plots.Plots.comparison_plots" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="stockDL.plots.Plots.in_out">
+<code class="sig-name descname"><span class="pre">in_out</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.plots.Plots.in_out" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="stockDL.plots.Plots.plot_predictions">
+<code class="sig-name descname"><span class="pre">plot_predictions</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.plots.Plots.plot_predictions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="stockDL.plots.Plots.plot_training_data">
+<code class="sig-name descname"><span class="pre">plot_training_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_selected</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'loss'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'val_loss'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.plots.Plots.plot_training_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-stockDL.preprocessing">
+<span id="stockdl-preprocessing-module"></span><h2>stockDL.preprocessing module<a class="headerlink" href="#module-stockDL.preprocessing" title="Permalink to this headline">¶</a></h2>
+<p>This module makes the data ready for predictions and calculations,
+This module requires the data module to get the data from the Yahoo finance API.
+This module has 3 main components:
+1. Convert the daily stock data to monthly data for analysis based on the opening prices for the month. 
+2. Creating an analysis window for predictions. [6 years is the window size in stockDL]
+3. Making data RNN ready.</p>
+<dl class="py class">
+<dt id="stockDL.preprocessing.data_preprocessing">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">stockDL.preprocessing.</span></code><code class="sig-name descname"><span class="pre">data_preprocessing</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ticker</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.preprocessing.data_preprocessing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="stockDL.preprocessing.data_preprocessing.create_window">
+<code class="sig-name descname"><span class="pre">create_window</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.preprocessing.data_preprocessing.create_window" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="stockDL.preprocessing.data_preprocessing.data_scaling">
+<code class="sig-name descname"><span class="pre">data_scaling</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfm</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.preprocessing.data_preprocessing.data_scaling" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="stockDL.preprocessing.data_preprocessing.monthly_df">
+<code class="sig-name descname"><span class="pre">monthly_df</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.preprocessing.data_preprocessing.monthly_df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-stockDL.results">
+<span id="stockdl-results-module"></span><h2>stockDL.results module<a class="headerlink" href="#module-stockDL.results" title="Permalink to this headline">¶</a></h2>
+<p>This is the final module responsible for the result calculation and parsing the dataframe to JSON.
+This module requires data from preprocessing, calculations, market and all their dependencies.</p>
+<dl class="py class">
+<dt id="stockDL.results.Results">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">stockDL.results.</span></code><code class="sig-name descname"><span class="pre">Results</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ticker</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.results.Results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="stockDL.results.Results.result_calculations">
+<code class="sig-name descname"><span class="pre">result_calculations</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.results.Results.result_calculations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-stockDL.train">
+<span id="stockdl-train-module"></span><h2>stockDL.train module<a class="headerlink" href="#module-stockDL.train" title="Permalink to this headline">¶</a></h2>
+<p>This module handles the training of the two-deep learning strategies used in this library.
+It requires preprocessing and models modules and their dependencies.</p>
+<dl class="py class">
+<dt id="stockDL.train.Training">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">stockDL.train.</span></code><code class="sig-name descname"><span class="pre">Training</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ticker</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.train.Training" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="stockDL.train.Training.learning_rate_reduction">
+<code class="sig-name descname"><span class="pre">learning_rate_reduction</span></code><a class="headerlink" href="#stockDL.train.Training.learning_rate_reduction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uncomment and add tensorboard to callbacks to run TensorBoard for visualisation
+self.tensorboard = keras.callbacks.TensorBoard(</p>
+<blockquote>
+<div><blockquote>
+<div><p>log_dir=’TensorBoard_Logs’,
+histogram_freq=1,
+embeddings_freq=1</p>
+</div></blockquote>
+<p>)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="stockDL.train.Training.models">
+<code class="sig-name descname"><span class="pre">models</span></code><a class="headerlink" href="#stockDL.train.Training.models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prevents false minima by reducing the learning rates on plateaus.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="stockDL.train.Training.train_model">
+<code class="sig-name descname"><span class="pre">train_model</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stockDL.train.Training.train_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stores the history of the LSTM model.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-stockDL">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-stockDL" title="Permalink to this headline">¶</a></h2>
+<p>Version of module</p>
+</div>
+</div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+    <nav class="relbar">
+      <a class="previous" href="modules.html" aria-label="Previous topic" >
+        <div class="icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"/></svg>
+        </div>
+        <div class="title">
+          <span class="text">
+            <span class="direction">previous</span>
+            stockDL
+          </span>
+        </div>
+      </a>
+    </nav>
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+
+          <div class="sidebar-resize-handle"></div>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="previous chapter">stockDL</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+<div id="ethical-ad-placement"></div>
+        </div>
+      </div>
+    <footer role="contentinfo">
+      &#169; Copyright 2021, Ashish Papanai.
+      Created using <a class="reference external" href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.1.
+      <a class="reference external" href="https://insipid-sphinx-theme.readthedocs.io/">Insipid Theme</a>.
+<a class="reference internal" href="_sources/stockDL.rst.txt" rel="nofollow">Show Source</a>.
+    </footer>
+    <div class="sidebar-resize-handle"></div>
+    <div id="overlay"></div>
+  </body>
+</html>
