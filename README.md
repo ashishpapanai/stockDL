@@ -77,7 +77,7 @@ for pip installation, dependencies are satisfied automatically.
 [MIT License &copy; Ashish Papanai 2021](https://github.com/ashishpapanai/stockDL/blob/master/LICENSE "MIT License Ashish Papanai 2021")
 
 ### Documentation: 
-Coming Soon! 
+Read the documentation[ here](https://stockdl.readthedocs.io/en/latest/ " here")
 
 ### Getting Help: 
 Post your questions in the [discussion section](https://github.com/ashishpapanai/stockDL/discussions "discussion section") of the GitHub repository or mail the author [ashishpapanai@gmail.com]
