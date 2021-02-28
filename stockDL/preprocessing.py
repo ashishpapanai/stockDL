@@ -1,3 +1,12 @@
+'''
+This module makes the data ready for predictions and calculations,
+This module requires the data module to get the data from the Yahoo finance API.
+This module has 3 main components:
+1. Convert the daily stock data to monthly data for analysis based on the opening prices for the month. 
+2. Creating an analysis window for predictions. [6 years is the window size in stockDL]
+3. Making data RNN ready.
+'''
+
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
@@ -18,7 +27,11 @@ class data_preprocessing:
         self.test = self.df_monthly.iloc[-self.split:, :]
         self.v_bh = np.ones(self.test.shape[0])
         self.v_ma = self.test["First Day Current Month Opening"] > self.test["mv_avg_12"]
-
+    '''
+    This function converts the daily stock data to montly by considering the first day of the month as the day to decide
+    if we should stay in the market or out. 
+    It also creates moving average of the data for 12 and 24 months to device more insights for traditional investment stratergy.
+    '''
     def monthly_df(self, df):
 
         dfm = df.resample("M").mean()
@@ -39,6 +52,10 @@ class data_preprocessing:
         dfm = dfm.iloc[24:, :]
         return dfm
 
+    '''
+    This function creates a sliding window for feeding the financial data to the DL model for training and analysis,
+    For stockDL we use a window of 6 past years from the current date/ year. 
+    '''
     def create_window(self, data, window_size):
         data_s = data.copy()
         for i in range(window_size):
@@ -47,6 +64,10 @@ class data_preprocessing:
         data.dropna(axis=0, inplace=True)
         return(data)
 
+    '''
+    In this function, 
+    The data is preprocessed to be in between 0 and 1, this makes the data sutiable for Recurrent Neural Network
+    '''
     def data_scaling(self, dfm):
         scaler = MinMaxScaler(feature_range=(0, 1))
         dg = pd.DataFrame(scaler.fit_transform(dfm[["High", "Low", "Open", "Close", "Volume", "First Day Current Month Opening",

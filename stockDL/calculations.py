@@ -1,3 +1,6 @@
+'''
+This module comprises all functions to calculate the net yield and gross yield.
+'''
 import pandas as pd
 import numpy as np
 
@@ -6,11 +9,23 @@ class Calculations():
         self.capital_gains_tax = 0.10
         self.broker_comission = 0.003
 
+    ''' This function will calculate the percentage gross yield in the investment per share of a particular stock ticker. '''
     def gross_yield(self, df, v):
         prod = (v*df["Quotient"]+1-v).prod()
         n_years = len(v)/12
         return (prod-1)*100, ((prod**(1/n_years))-1)*100
 
+    '''
+    Function to convert a 1D vector of zeros and ones to a 2D vector of zeros and ones,
+    with the groups of ones seperated to different columns.
+    E.g. [0,1,1,0,1,1,1,0,1]
+    [[0, 1, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1]]),
+
+    This function will help us to separate In - Trading Months from the Out - Non Trading months.
+
+    '''
     def separate_ones(self, u):
         u_ = np.r_[0, u, 0]
         i = np.flatnonzero(u_[:-1] != u_[1:])
@@ -32,6 +47,10 @@ class Calculations():
         out = o.cumsum().reshape(n, -1)
         return out, n
 
+    '''
+    The following function will calculate the net yield in the share till the investment period.
+    After deducting the capital gains and broker commission from the gains. 
+    '''
     def net_yield(self, df, v):
         n_years = len(v)/12
         w, n = self.separate_ones(v)
@@ -44,6 +63,9 @@ class Calculations():
         prod = An.prod()*((1-self.broker_comission)**(2*n))
         return (prod-1)*100, ((prod**(1/n_years))-1)*100
 
+    '''
+    Total money including the basic invested by the investor in a share in the market.     
+    '''
     def gross_portfolio(self, df, w):
         portfolio = [(w*df["Quotient"]+(1-w))[:i].prod() for i in range(len(w))]
         return portfolio

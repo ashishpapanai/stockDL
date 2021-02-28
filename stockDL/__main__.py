@@ -1,3 +1,6 @@
+'''
+Entry point of the library for website backends and CLI applications.
+'''
 from .main import Main
 
 
