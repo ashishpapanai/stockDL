@@ -4,7 +4,8 @@ The stock data is loaded from its unique stock symbol, also called ticker.
 After the data is loaded, we drop the axis which isn't being used by us in the library.
 After dropping the unnecessary axis we calculate and store the first days of each trading month in a list. 
 '''
-
+import os  
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 import datetime
 import yfinance as yf
 import tensorflow as tf

@@ -3,6 +3,8 @@ This module helps in plotting the various details related to the model and the p
 This module requires the processed data from the pre-processing module, training data from the train module,
 Market information from the market module, and the calculations from the calculations module. 
 '''
+import os  
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 import matplotlib.pyplot as plt
 from . import train, preprocessing, market, calculations
 

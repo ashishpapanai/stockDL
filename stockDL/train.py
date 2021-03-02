@@ -2,7 +2,8 @@
 This module handles the training of the two-deep learning strategies used in this library.
 It requires preprocessing and models modules and their dependencies. 
 '''
-
+import os  
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 from keras.callbacks import ReduceLROnPlateau
 from . import models
 from . import preprocessing

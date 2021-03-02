@@ -3,6 +3,8 @@ This module stores the brain of the library which is the Deep Learning model.
 The two Deep Learning strategies are defined in their respective methods. 
 This module requires to run the preprocessing module so that the model gets the data to work on. 
 '''
+import os  
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 from keras.models import Sequential
 from keras.optimizers import Adam
 from keras.layers import Dense, Dropout, Conv1D, LSTM

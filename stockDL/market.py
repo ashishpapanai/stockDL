@@ -2,6 +2,8 @@
 This module stores the stock market variables related to the stock ticker, 
 This module must be run after training the model by calling the train_model() function in the train module.
 '''
+import os  
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 import numpy as np
 from . import train
 class Market():

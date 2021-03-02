@@ -6,7 +6,8 @@ This module has 3 main components:
 2. Creating an analysis window for predictions. [6 years is the window size in stockDL]
 3. Making data RNN ready.
 '''
-
+import os  
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd

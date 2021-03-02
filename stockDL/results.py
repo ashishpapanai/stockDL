@@ -2,6 +2,8 @@
 This is the final module responsible for the result calculation and parsing the dataframe to JSON.
 This module requires data from preprocessing, calculations, market and all their dependencies.
 '''
+import os  
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 import pandas as pd
 from . import calculations, preprocessing, market
 

@@ -9,7 +9,8 @@ The plots module helps in plotting the necessary graphs for better visualisation
 The result module uses the calculation and market modules to run the necessary calculations on the predictions,
 and generate net and the gross yield on the predictions obtained. 
 """
-
+import os  
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 from . import preprocessing, train, plots, results
 
 
