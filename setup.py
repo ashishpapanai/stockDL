@@ -27,7 +27,7 @@ setup(
     ],
     packages=["stockDL"],
     include_package_data=True,
-    install_requires=["pandas", "numpy", "matplotlib", "keras", "tensorflow", "yahoo-finance", "yfinance", "fix-yahoo-finance"],
+    install_requires=["pandas", "numpy", "matplotlib", "keras", "tensorflow", "yahoo-finance", "yfinance"],
     entry_points={
         "console_scripts": [
             "stocksDL=stocksDL.__main__:main",
