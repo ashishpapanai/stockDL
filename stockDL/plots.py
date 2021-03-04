@@ -3,18 +3,25 @@ This module helps in plotting the various details related to the model and the p
 This module requires the processed data from the pre-processing module, training data from the train module,
 Market information from the market module, and the calculations from the calculations module. 
 '''
-import os  
+import os
+
+from tensorflow.python.keras.engine.training import Model  
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 import matplotlib.pyplot as plt
-from . import train, preprocessing, market, calculations
+from . import train, preprocessing, market, calculations, models
 
 
 class Plots:
     def __init__(self, ticker):
         self.preprocessing = preprocessing.data_preprocessing(ticker)
         self.train = train.Training(ticker)
+        self.model = models.Models(ticker)
         self.market = market.Market(ticker)
         self.calculations = calculations.Calculations()
+        self.training_plot_loss = self.plot_training_data(model_selected=self.model.LSTM_Model)
+        self.predictions_plot = self.predictions_plot()
+        self.in_out_plot = self.in_out()
+        self.comparison_plot = self.comparison_plot()
     '''
     This function will plot the training data of the model and will use loss as the metric to depict the quality of the model. 
     This can be analsysed by TensorBoard as well, as tensorflow is a dependency of the stockDL library, 
@@ -28,6 +35,7 @@ class Plots:
         plt.xlabel('epoch')
         plt.legend(['train', 'test'], loc='upper right')
         plt.show()
+        return plt
     
     '''
     This function plots the actual financial data of a stock and the predictions by the two deep learning strategies used in the library.
@@ -41,7 +49,8 @@ class Plots:
         plt.legend(fontsize=20)
         plt.grid(axis="both")
         plt.title("Actual Open Price and Pedicted Ones on train set", fontsize=20)
-        plt.show()
+        # plt.show()
+        return plt
 
     '''
     This function plots the months we would stay in the market for trading as 1's and the months we would stay out of the market as 0's.
@@ -63,7 +72,8 @@ class Plots:
         plt.grid(axis="both")
         plt.title(
             "Actual Open Price, Predicted Ones and Vectors on In and Out Moments", fontsize=20)
-        plt.show()
+        # plt.show()
+        return plt
 
     '''
     This plotting function plots a comparison plot between the traditional financial strategies and the deep learning strategies,
@@ -79,4 +89,6 @@ class Plots:
         plt.legend(fontsize=20)
         plt.grid(axis="both")
         plt.title("Gross Portfolios of three methods", fontsize=20)
-        plt.show()
+
+        return plt
+        # plt.show()
