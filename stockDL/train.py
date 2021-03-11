@@ -2,20 +2,18 @@
 This module handles the training of the two-deep learning strategies used in this library.
 It requires preprocessing and models modules and their dependencies. 
 '''
-import os  
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
-from keras.callbacks import ReduceLROnPlateau
-from . import models
 from . import preprocessing
+from . import models
+from keras.callbacks import ReduceLROnPlateau
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
 class Training:
     def __init__(self, ticker):
         self.preprocessing = preprocessing.data_preprocessing(ticker)
         self.models = models.Models(ticker)
-        
         '''Prevents false minima by reducing the learning rates on plateaus. '''
-
         self.learning_rate_reduction = ReduceLROnPlateau(monitor='val_loss',
                                                          patience=25,
                                                          verbose=1,
@@ -31,12 +29,17 @@ class Training:
         # self.lstm_history, self.mix_history = self.train_model()
         # self.models.lstm_model.save_weights(lstm_weights.h5")
         # self.models.mix_lstm_model.save_weights("mix_lstm_weights.h5")
-        self.y_pred_train_lstm = self.models.lstm_model.predict(self.preprocessing.X_train)
-        self.y_pred_train_mix = self.models.mix_lstm_model.predict(self.preprocessing.X_train)
-        self.y_pred_lstm = self.models.lstm_model.predict(self.preprocessing.X_test)
-        self.y_pred_mix = self.models.mix_lstm_model.predict(self.preprocessing.X_test)
+        self.y_pred_train_lstm = self.models.lstm_model.predict(
+            self.preprocessing.X_train)
+        self.y_pred_train_mix = self.models.mix_lstm_model.predict(
+            self.preprocessing.X_train)
+        self.y_pred_lstm = self.models.lstm_model.predict(
+            self.preprocessing.X_test)
+        self.y_pred_mix = self.models.mix_lstm_model.predict(
+            self.preprocessing.X_test)
 
     '''Currently both models are trained together by this function. '''
+
     def train_model(self):
         '''Stores the history of the LSTM model. '''
         lstm_history = self.models.lstm_model.fit(self.preprocessing.X_train, self.preprocessing.y_train, epochs=400,

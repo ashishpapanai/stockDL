@@ -80,7 +80,7 @@ for pip installation, dependencies are satisfied automatically.
 Read the documentation[ here](https://stockdl.readthedocs.io/en/latest/ " here")
 
 ### Getting Help: 
-Post your questions in the [discussion section](https://github.com/ashishpapanai/stockDL/discussions "discussion section") of the GitHub repository or mail the author [ashishpapanai@gmail.com]
+Post your questions in the [discussion section](https://github.com/ashishpapanai/stockDL/discussions "discussion section") of the GitHub repository or mail the author [ashishpapanai00@gmail.com]
 
 ### Contributing to stockDL:
 Contributions are not restricted to bug fixes or enhancements. We welcome contributions including any grammatical or typo error anywhere in the repository. 

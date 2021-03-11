@@ -18,18 +18,18 @@ class Plots:
         self.model = models.Models(ticker)
         self.market = market.Market(ticker)
         self.calculations = calculations.Calculations()
-        self.training_plot_loss = self.plot_training_data(model_selected=self.model.LSTM_Model)
-        self.predictions_plot = self.predictions_plot()
+        #self.training_plot_loss = self.plot_training_data()
+        self.predictions_plot = self.plot_predictions()
         self.in_out_plot = self.in_out()
-        self.comparison_plot = self.comparison_plot()
+        self.comparison_plot = self.comparison_plots()
     '''
     This function will plot the training data of the model and will use loss as the metric to depict the quality of the model. 
     This can be analsysed by TensorBoard as well, as tensorflow is a dependency of the stockDL library, 
     TensorBoard provides comparison of traning sessions by comparing the traget metrics after changing the values of parameters and hyperparameters.  
     '''
-    def plot_training_data(self, model_selected, metric='loss', val_metric='val_loss'):
-        plt.plot(model_selected.history[metric])
-        plt.plot(model_selected.history[val_metric])
+    def plot_training_data(self, metric='loss', val_metric='val_loss'):
+        plt.plot(self.model.lstm_model.history[metric])
+        plt.plot(self.model.lstm_model.history[val_metric])
         plt.title('model loss')
         plt.ylabel('loss')
         plt.xlabel('epoch')
