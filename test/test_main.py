@@ -1,3 +1,3 @@
-from stockDL import main
+from ..stockDL import main
 
 main.Main('HDFC.NS')
