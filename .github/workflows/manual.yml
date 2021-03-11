@@ -1,0 +1,23 @@
+# This is a basic workflow that is manually triggered
+
+name: Codecov coverage test
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:[commit, pull_request, issues]
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "codecov"
+  codecov:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Runs a single command using the runners shell
+    - name: "Upload coverage to Codecov"
+      uses: codecov/codecov-action@v1
+      with:
+        fail_ci_if_error: true
