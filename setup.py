@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="stockDL",
-    version="0.0.7",
+    version="0.1.0",
     description="Predicts the Gross Yield, Annual Yield and Net Yield of a user given stock ticker.",
     long_description=README,
     long_description_content_type="text/markdown",

@@ -2,11 +2,11 @@
 This is the final module responsible for the result calculation and parsing the dataframe to JSON.
 This module requires data from preprocessing, calculations, market and all their dependencies.
 '''
-import os  
+import os
+import json
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 import pandas as pd
 from . import calculations, preprocessing, market
-
 
 class Results:
     def __init__(self, ticker):
@@ -41,4 +41,8 @@ class Results:
         results["Annual Net Yield"] = [str(round(self.calculations.net_yield(self.preprocessing.test, vi)[1], 2)) + " %"
                                        for vi in vs]
 
+        #results_json = results.to_json(orient="records")
+        #parsed = json.loads(result)
+        #json.dumps(parsed, indent=4) 
+        #print(results_json)
         return results

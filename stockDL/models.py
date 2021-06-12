@@ -39,7 +39,7 @@ class Models():
         model.add(Dropout(0.5))
         model.add(Dense(100, kernel_initializer='uniform', activation='relu'))
         model.add(Dense(1, kernel_initializer='uniform', activation='relu'))
-        model.compile(loss='mse', optimizer=Adam(lr=0.001))
+        model.compile(loss='mse', optimizer=Adam(learning_rate=0.001))
 
         return model
 
@@ -66,6 +66,6 @@ class Models():
         model.add(Dense(100, kernel_initializer='uniform', activation='relu'))
         model.add(Dense(1, kernel_initializer='uniform', activation='relu'))
 
-        model.compile(loss='mse', optimizer=Adam(lr=0.001))
+        model.compile(loss='mse', optimizer=Adam(learning_rate=0.001))
 
         return model

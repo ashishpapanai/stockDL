@@ -34,7 +34,7 @@ class Plots:
         plt.ylabel('loss')
         plt.xlabel('epoch')
         plt.legend(['train', 'test'], loc='upper right')
-        plt.show()
+        #plt.show()
         return plt
     
     '''
