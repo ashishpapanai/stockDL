@@ -2,15 +2,16 @@
 This module handles the training of the two-deep learning strategies used in this library.
 It requires preprocessing and models modules and their dependencies. 
 '''
-from . import preprocessing
+from . import preprocessing, main
 from . import models
 from keras.callbacks import ReduceLROnPlateau
+from keras.models import load_model
+from keras.optimizers import Adam
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-
 class Training:
-    def __init__(self, ticker):
+    def __init__(self, ticker, saved):
         self.preprocessing = preprocessing.data_preprocessing(ticker)
         self.models = models.Models(ticker)
         '''Prevents false minima by reducing the learning rates on plateaus. '''
@@ -26,17 +27,25 @@ class Training:
                                                         embeddings_freq=1
                                                     )  
         '''
-        # self.lstm_history, self.mix_history = self.train_model()
-        # self.models.lstm_model.save_weights(lstm_weights.h5")
-        # self.models.mix_lstm_model.save_weights("mix_lstm_weights.h5")
-        self.y_pred_train_lstm = self.models.lstm_model.predict(
-            self.preprocessing.X_train)
-        self.y_pred_train_mix = self.models.mix_lstm_model.predict(
-            self.preprocessing.X_train)
-        self.y_pred_lstm = self.models.lstm_model.predict(
-            self.preprocessing.X_test)
-        self.y_pred_mix = self.models.mix_lstm_model.predict(
-            self.preprocessing.X_test)
+        if saved.lower() == "yes":
+            main.trained = True
+            self.models.lstm_model.load_weights('stockDL\weights\lstm_weights.h5')
+            self.models.mix_lstm_model.load_weights('stockDL\weights\mix_lstm_weights.h5')
+            self.y_pred_train_lstm = self.models.lstm_model.predict(self.preprocessing.X_train)
+            self.y_pred_train_mix = self.models.mix_lstm_model.predict(self.preprocessing.X_train)
+            self.y_pred_lstm = self.models.lstm_model.predict(self.preprocessing.X_test)
+            self.y_pred_mix = self.models.mix_lstm_model.predict(self.preprocessing.X_test)
+        else:
+            '''Trains the data on the defined models'''
+            if main.trained:
+                pass
+            else:
+                self.train_model()
+                main.trained = True
+            self.y_pred_train_lstm = self.models.lstm_model.predict(self.preprocessing.X_train)
+            self.y_pred_train_mix = self.models.mix_lstm_model.predict(self.preprocessing.X_train)
+            self.y_pred_lstm = self.models.lstm_model.predict(self.preprocessing.X_test)
+            self.y_pred_mix = self.models.mix_lstm_model.predict(self.preprocessing.X_test)
 
     '''Currently both models are trained together by this function. '''
 
@@ -51,4 +60,6 @@ class Training:
                                                      batch_size=48, validation_data=(self.preprocessing.X_test,
                                                                                      self.preprocessing.y_test),
                                                      verbose=2, callbacks=[self.learning_rate_reduction], shuffle=False)
+        self.models.lstm_model.save_weights("./stockDL/weights/lstm_weights.h5")
+        self.models.mix_lstm_model.save_weights("./stockDL/weights/mix_lstm_weights.h5")
         return lstm_history, mix_history

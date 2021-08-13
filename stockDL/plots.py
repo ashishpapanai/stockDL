@@ -14,7 +14,7 @@ from . import train, preprocessing, market, calculations, models
 class Plots:
     def __init__(self, ticker):
         self.preprocessing = preprocessing.data_preprocessing(ticker)
-        self.train = train.Training(ticker)
+        self.train = train.Training(ticker, "no")
         self.model = models.Models(ticker)
         self.market = market.Market(ticker)
         self.calculations = calculations.Calculations()
@@ -89,6 +89,4 @@ class Plots:
         plt.legend(fontsize=20)
         plt.grid(axis="both")
         plt.title("Gross Portfolios of three methods", fontsize=20)
-
         return plt
-        # plt.show()

@@ -8,7 +8,7 @@ import numpy as np
 from . import train
 class Market():
     def __init__(self, ticker):
-        self.train = train.Training(ticker)
+        self.train = train.Training(ticker, "no")
         self.w_lstm = np.diff(self.train.y_pred_lstm.reshape(self.train.y_pred_lstm.shape[0]), 1)
         ''' This stores the predictions of the lstm model and reshapes it. '''
         self.v_lstm = np.maximum(np.sign(self.w_lstm), 0)

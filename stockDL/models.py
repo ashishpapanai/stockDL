@@ -17,7 +17,6 @@ class Models():
         self.preprocessing = preprocessing.data_preprocessing(ticker)
         self.lstm_model = self.LSTM_Model(self.preprocessing.window+1, 8)
         self.mix_lstm_model = self.Mix_LSTM_Model(self.preprocessing.window+1, 8)
-
     '''
     The LSTM model is based on the LSTM Network which is a modified and better implementation of RNN, 
     LSTM are free from the vanishing gradients problem and so we use them for time-series predictions. 
@@ -65,7 +64,6 @@ class Models():
         model.add(Dropout(0.5))
         model.add(Dense(100, kernel_initializer='uniform', activation='relu'))
         model.add(Dense(1, kernel_initializer='uniform', activation='relu'))
-
         model.compile(loss='mse', optimizer=Adam(learning_rate=0.001))
 
         return model
