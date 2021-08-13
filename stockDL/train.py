@@ -29,8 +29,8 @@ class Training:
         '''
         if saved.lower() == "yes":
             main.trained = True
-            self.models.lstm_model.load_weights('stockDL\weights\lstm_weights.h5')
-            self.models.mix_lstm_model.load_weights('stockDL\weights\mix_lstm_weights.h5')
+            self.models.lstm_model.load_weights('lstm_weights.h5')
+            self.models.mix_lstm_model.load_weights('mix_lstm_weights.h5')
             self.y_pred_train_lstm = self.models.lstm_model.predict(self.preprocessing.X_train)
             self.y_pred_train_mix = self.models.mix_lstm_model.predict(self.preprocessing.X_train)
             self.y_pred_lstm = self.models.lstm_model.predict(self.preprocessing.X_test)
@@ -60,6 +60,6 @@ class Training:
                                                      batch_size=48, validation_data=(self.preprocessing.X_test,
                                                                                      self.preprocessing.y_test),
                                                      verbose=2, callbacks=[self.learning_rate_reduction], shuffle=False)
-        self.models.lstm_model.save_weights("./stockDL/weights/lstm_weights.h5")
-        self.models.mix_lstm_model.save_weights("./stockDL/weights/mix_lstm_weights.h5")
+        self.models.lstm_model.save_weights("lstm_weights.h5")
+        self.models.mix_lstm_model.save_weights("mix_lstm_weights.h5")
         return lstm_history, mix_history
