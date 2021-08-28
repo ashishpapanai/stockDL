@@ -6,7 +6,7 @@ This module requires to run the preprocessing module so that the model gets the 
 import os  
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  
 from keras.models import Sequential
-from keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam
 from keras.layers import Dense, Dropout, Conv1D, LSTM
 
 from . import preprocessing

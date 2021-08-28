@@ -12,11 +12,11 @@ from . import train, preprocessing, market, calculations, models
 
 
 class Plots:
-    def __init__(self, ticker):
+    def __init__(self, ticker, saved):
         self.preprocessing = preprocessing.data_preprocessing(ticker)
-        self.train = train.Training(ticker, "no")
+        self.train = train.Training(ticker, saved)
         self.model = models.Models(ticker)
-        self.market = market.Market(ticker)
+        self.market = market.Market(ticker, saved)
         self.calculations = calculations.Calculations()
         #self.training_plot_loss = self.plot_training_data()
         self.predictions_plot = self.plot_predictions()
@@ -34,7 +34,7 @@ class Plots:
         plt.ylabel('loss')
         plt.xlabel('epoch')
         plt.legend(['train', 'test'], loc='upper right')
-        #plt.show()
+        plt.show()
         return plt
     
     '''
@@ -49,7 +49,7 @@ class Plots:
         plt.legend(fontsize=20)
         plt.grid(axis="both")
         plt.title("Actual Open Price and Pedicted Ones on train set", fontsize=20)
-        # plt.show()
+        plt.show()
         return plt
 
     '''
@@ -72,7 +72,7 @@ class Plots:
         plt.grid(axis="both")
         plt.title(
             "Actual Open Price, Predicted Ones and Vectors on In and Out Moments", fontsize=20)
-        # plt.show()
+        plt.show()
         return plt
 
     '''
@@ -89,4 +89,5 @@ class Plots:
         plt.legend(fontsize=20)
         plt.grid(axis="both")
         plt.title("Gross Portfolios of three methods", fontsize=20)
+        plt.show()
         return plt

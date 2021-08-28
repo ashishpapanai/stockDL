@@ -9,9 +9,9 @@ import pandas as pd
 from . import calculations, preprocessing, market
 
 class Results:
-    def __init__(self, ticker):
+    def __init__(self, ticker, saved):
         self.preprocessing = preprocessing.data_preprocessing(ticker)
-        self.market = market.Market(ticker)
+        self.market = market.Market(ticker, saved)
         self.calculations = calculations.Calculations()
         self.result = self.result_calculations()
 

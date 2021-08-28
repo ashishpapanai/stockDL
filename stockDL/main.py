@@ -27,11 +27,11 @@ class Main:
         '''Trains the data on the defined models'''
         #self.train.train_model()
         '''Creates an instance of the plots module for better visualisation of training and validation data'''
-        self.plots = plots.Plots(ticker)
+        self.plots = plots.Plots(ticker, saved)
         '''Generates a comparison plot of the 4 methos used'''
         #self.plots.comparison_plots()
         '''An instance of the result module to calculate and process the final predictions on the data by the trained model.'''
-        self.results = results.Results(ticker)
+        self.results = results.Results(ticker, saved)
         '''Stores the final result in a pandas dataframe'''
         self.result = self.results.result
         '''Converts the pandas dataframe to JSON for better utilisation by web developers'''
