@@ -60,6 +60,6 @@ class Training:
                                                      batch_size=48, validation_data=(self.preprocessing.X_test,
                                                                                      self.preprocessing.y_test),
                                                      verbose=2, callbacks=[self.learning_rate_reduction], shuffle=False)
-        self.models.lstm_model.save_weights("./stockDL/lstm_weights.h5")
-        self.models.mix_lstm_model.save_weights("./stockDL/mix_lstm_weights.h5")
+        self.models.lstm_model.save_weights("./lstm_weights.h5")
+        self.models.mix_lstm_model.save_weights("./mix_lstm_weights.h5")
         return lstm_history, mix_history
