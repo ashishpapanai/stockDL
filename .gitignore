@@ -1,4 +1,5 @@
 venv
+env
 .vscode
 TensorBoard_Logs
 lstm_weights.h5
