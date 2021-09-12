@@ -2,6 +2,8 @@
 This module handles the training of the two-deep learning strategies used in this library.
 It requires preprocessing and models modules and their dependencies. 
 '''
+import pandas as pd
+import matplotlib.pyplot as plt
 from . import preprocessing, main
 from . import models
 from keras.callbacks import ReduceLROnPlateau
@@ -55,11 +57,15 @@ class Training:
                                                   batch_size=48, validation_data=(self.preprocessing.X_test,
                                                                                   self.preprocessing.y_test),
                                                   verbose=2, callbacks=[self.learning_rate_reduction], shuffle=False)
+        pd.DataFrame(lstm_history.history).plot(figsize=(8,5))
+        plt.show()
         '''Stores the history of the Conv1D + LSTM Model or the Mix Model. '''
         mix_history = self.models.mix_lstm_model.fit(self.preprocessing.X_train, self.preprocessing.y_train, epochs=400,
                                                      batch_size=48, validation_data=(self.preprocessing.X_test,
                                                                                      self.preprocessing.y_test),
                                                      verbose=2, callbacks=[self.learning_rate_reduction], shuffle=False)
+        pd.DataFrame(mix_history.history).plot(figsize=(8,5))
+        plt.show()
         self.models.lstm_model.save_weights("./lstm_weights.h5")
         self.models.mix_lstm_model.save_weights("./mix_lstm_weights.h5")
         return lstm_history, mix_history
