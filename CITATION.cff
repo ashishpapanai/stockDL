@@ -1,6 +1,6 @@
 authors:
-  - family-names: Ashish
-    given-names: Papanai
+  - family-names: Papanai
+    given-names: Ashish
 cff-version: 0.2.3
 message: "If you use this library, please cite it using these metadata."
 title: "stockDL: A Deep Learning library for stocks price predictions and calculations. "
