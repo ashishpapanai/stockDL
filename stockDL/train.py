@@ -68,4 +68,6 @@ class Training:
         plt.show()
         self.models.lstm_model.save_weights("./lstm_weights.h5")
         self.models.mix_lstm_model.save_weights("./mix_lstm_weights.h5")
+        self.models.lstm_model.save("./lstm.h5")
+        self.models.mix_lstm_model.save("./mix_lstm.h5")
         return lstm_history, mix_history
